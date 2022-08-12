@@ -5,14 +5,14 @@ using namespace std;
 
 int main()
 {
-	int answer[5] = {1, 1, 2, 2, 8};
+	int answer[6] = {1, 1, 2, 2, 2, 8};
 
-	int inputArray[5];
+	int inputArray[6];
 
-	for (int i=0; i < 5; i++)
+	for (int i=0; i < 6; i++)
 		cin >> inputArray[i];
 
-	for (int i =0; i < 5; i++)
+	for (int i =0; i < 6; i++)
 		cout << answer[i] - inputArray[i] << " ";
 
 	cout << endl;

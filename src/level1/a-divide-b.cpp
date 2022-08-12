@@ -10,8 +10,8 @@ int main()
 	cin >> a;
 	cin >> b;
 
-	float result = (float)a / (float)b;
-	cout << fixed << setprecision(9);
+	double result = (double) a / (double) b;
+	cout << fixed << setprecision(20);
 	cout << result << endl;
 
 	return 0;

@@ -5,7 +5,6 @@ int main()
 {
 	int  a, b;
 
-	std::cout << "input two number: " << std::endl;
 	std::cin >> a;
 	std::cin >> b;
 

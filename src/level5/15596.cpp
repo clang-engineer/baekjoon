@@ -1,12 +1,12 @@
 #include <iostream>
 #include <vector>
 
-int sum_of_vec(std::vector<int> &a)
+int sum_of_vec(std::vector<int> &vec)
 {
 	int sum = 0;
-	for (int i = 0; i < a.size(); i++)
+	for (auto iter = vec.begin(); iter != vec.end(); ++iter)
 	{
-		sum += a[i];
+		sum += *iter;
 	}
 	return sum;
 }

@@ -6,6 +6,9 @@ int main()
 {
 	int num;
 
+	cin.tie(NULL);
+	ios::sync_with_stdio(false);
+
 	cin >> num;
 
 	for (int i = 0; i < num; i++)
@@ -14,7 +17,7 @@ int main()
 		cin >> A;
 		cin >> B;
 
-		cout << "CASE #" << i + 1 << ": " << A + B << endl;
+		cout << "Case #" << i + 1 << ": " << A + B << endl;
 	}
     return 0;
 }

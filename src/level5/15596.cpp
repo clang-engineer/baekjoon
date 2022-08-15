@@ -1,15 +1,7 @@
 #include <iostream>
 #include <vector>
 
-int sum_of_vec(std::vector<int> &vec)
-{
-	int sum = 0;
-	for (auto iter = vec.begin(); iter != vec.end(); ++iter)
-	{
-		sum += *iter;
-	}
-	return sum;
-}
+int sum_of_vec(std::vector<int>& vec);
 
 int main()
 {
@@ -29,5 +21,15 @@ int main()
 	std::cout << sum << std::endl;
 
     return 0;
+}
+
+int sum_of_vec(std::vector<int> &vec)
+{
+	int sum = 0;
+	for (auto iter = vec.begin(); iter != vec.end(); ++iter)
+	{
+		sum += *iter;
+	}
+	return sum;
 }
 

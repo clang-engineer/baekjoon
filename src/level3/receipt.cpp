@@ -17,7 +17,7 @@ int main()
 		cin >> price;
 		cin >> num;
 
-		total -= price * count;
+		total -= price * num;
 	}
 
 	if (total == 0)

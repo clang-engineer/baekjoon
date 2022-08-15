@@ -4,7 +4,10 @@ using namespace std;
 
 int main()
 {
-	while (1) 
+	cin.tie(false);
+	ios::sync_with_stdio(false);
+
+	for (int i = 0; i < 5; i++) 
 	{
 		int A, B;
 		cin >> A;

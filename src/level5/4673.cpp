@@ -6,7 +6,7 @@ int get_sum_of_digits(int num);
 
 int main()
 {
-	int total_num = 100;
+	int total_num = 10000;
 
 	std::vector<int> vec;
 

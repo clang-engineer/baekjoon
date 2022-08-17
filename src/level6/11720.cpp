@@ -13,10 +13,14 @@ int main()
 
 	for (int i = 0; i < sizeof(target_num); i++)
 	{
-		result += target_num[i] - '0';
+		if (std::isdigit(target_num[i]) == true)
+		{
+			result += target_num[i] - '0';
+		}
 	}
 
 	std::cout << result << std::endl;
+
 
 	return 0;
 }

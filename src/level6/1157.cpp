@@ -29,36 +29,32 @@ int main()
 
 
 	std::vector<char_container> cc;
+	int max_num = 0;
 	for (auto iter = set.begin(); iter != set.end(); iter++)
 	{
 		int count = count_char_of_string(target_str, *iter);
 		char_container temp = {*iter, count};
 		cc.push_back(temp);
-	}
 
-	int max = 0;
-	for (auto iter = cc.begin(); iter != cc.end(); iter++)
-	{
-		if ((*iter).count > max)
+		if (count > max_num)
 		{
-			max = (*iter).count;
+			max_num = count;
 		}
 	}
 
-
-	int max_count = 0;
+	int max_num_count = 0;
 	for (auto iter = cc.begin(); iter != cc.end(); iter++)
 	{
-		if ((*iter).count == max)
+		if ((*iter).count == max_num)
 		{
-			max_count += 1;
+			max_num_count += 1;
 		}
 	}
 
-	if (max_count == 1)
+	if (max_num_count == 1)
 	{
-		auto iter = std::find_if(cc.begin(), cc.end(), [max](const char_container& data) -> bool {
-				return max == data.count;
+		auto iter = std::find_if(cc.begin(), cc.end(), [max_num](const char_container& data) -> bool {
+				return max_num == data.count;
 				});
 		
 		std::cout << (*iter).digit << std::endl;

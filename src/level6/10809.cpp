@@ -8,9 +8,10 @@ int main()
 
 	const std::string albet{"abcdefghijklmnopqrstuvwxyz"};
 
-	for (int i = 0; i < sizeof(albet); i++)
+	for (int i = 0; i < albet.length(); i++)
 	{
 		int pos = keyword.find(albet[i]);
+
 		std::cout << pos << " ";
 	}
 

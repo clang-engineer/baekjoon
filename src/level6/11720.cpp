@@ -11,7 +11,7 @@ int main()
 
 	int result = 0;
 
-	for (int i = 0; i < sizeof(target_num); i++)
+	for (int i = 0; i < count; i++)
 	{
 		if (std::isdigit(target_num[i]) == true)
 		{

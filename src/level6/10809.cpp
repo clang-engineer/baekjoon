@@ -11,9 +11,11 @@ int main()
 	for (int i = 0; i < sizeof(albet); i++)
 	{
 		int pos = keyword.find(albet[i]);
-		std::cout << pos << std::endl;
+		std::cout << pos << " ";
 	}
 
-    return 0;
+	std::cout << std::endl;
+
+	return 0;
 }
 

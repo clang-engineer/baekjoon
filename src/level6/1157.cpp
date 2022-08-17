@@ -19,7 +19,7 @@ int main()
 	std::set<char> set;
 
 	std::for_each(target_str.begin(), target_str.end(), [](char & c) {
-        c = ::tolower(c);
+        c = ::toupper(c);
     });
 
 	for (int i = 0; i < target_str.length(); i++)

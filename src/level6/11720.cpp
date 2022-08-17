@@ -6,25 +6,18 @@ int main()
 	int count;
 	std::cin >> count;
 
-	int target_num;
+	std::string target_num;
 	std::cin >> target_num;
 
-	std::vector<int> vec;
-
-	while (target_num != 0)
-	{
-		vec.push_back(target_num % 10);
-		target_num /= 10;
-	}
-
 	int result = 0;
-	for (auto it = vec.begin(); it != vec.end(); ++it)
+
+	for (int i = 0; i < sizeof(target_num); i++)
 	{
-		result += *it;
+		result += target_num[i] - '0';
 	}
 
 	std::cout << result << std::endl;
-	
+
 	return 0;
 }
 

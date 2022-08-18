@@ -2,7 +2,7 @@
 #include <vector>
 
 
-int reverse_number(int& n);
+void reverse_number(int& n);
 
 int main()
 {
@@ -26,7 +26,7 @@ int main()
 	return 0;
 }
 
-int reverse_number(int& n)
+void reverse_number(int& n)
 {
 	int temp = n;
 	int reversed_number = 0, remainder;

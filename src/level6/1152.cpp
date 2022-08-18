@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <sstream>
-
+#include <algorithm>
 
 std::vector<std::string> split(std::string input, char delimiter);
 void trim(std::string &s);

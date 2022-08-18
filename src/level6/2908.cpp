@@ -28,13 +28,14 @@ int main()
 
 int reverse_number(int& n)
 {
+	int temp = n;
 	int reversed_number = 0, remainder;
 
-	while (n != 0)
+	while (temp != 0)
 	{
-		remainder = n % 10;
+		remainder = temp % 10;
 		reversed_number = reversed_number * 10 + remainder;
-		n /= 10;
+		temp /= 10;
 	}
 
 	n = reversed_number;

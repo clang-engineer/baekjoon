@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 int get_word_freq(std::string &find_str, std::string &origin_str);
 

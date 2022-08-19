@@ -12,7 +12,7 @@ int main()
 
 	int count = 0;
 
-	for (int i = 0; i < input.length() - 1; i++)
+	for (int i = 0; i < input.size() - 1; i++)
 	{
 		std::string target_string = input.substr(i, 2);
 		if (std::find(vec.begin(), vec.end(), target_string) != vec.end())
@@ -21,7 +21,7 @@ int main()
 		}
 	}
 
-	for (int i = 0; i < input.length() - 2; i++)
+	for (int i = 0; i < input.size() - 2; i++)
 	{
 		std::string target_string_len2 = input.substr(i, 3);
 		std::string target_string_len3 = input.substr(i, 3);
@@ -42,12 +42,12 @@ int main()
 			int index = input.find(*iter);
 			if (index != std::string::npos)
 			{
-				input.replace(input.find(*iter), (*iter).length(), "0");
+				input.replace(input.find(*iter), (*iter).size(), "0");
 			}
 		}
 	}
 
-	for (int i = 0; i < input.length(); i++)
+	for (int i = 0; i < input.size(); i++)
 	{
 		if (input[i] != '0')
 		{
@@ -62,8 +62,8 @@ int main()
 
 int get_word_freq(std::string &find_str, std::string &origin_str)
 {
-	int find_str_len = find_str.length();
-	int origin_str_len = origin_str.length();
+	int find_str_len = find_str.size();
+	int origin_str_len = origin_str.size();
 	int result = 0;
 
 	for (int i = 0; i <= origin_str_len - find_str_len; i++)

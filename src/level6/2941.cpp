@@ -24,7 +24,7 @@ int main()
 
 	for (int i = 0; i < input.size() - 2; i++)
 	{
-		std::string target_string_len2 = input.substr(i, 3);
+		std::string target_string_len2 = input.substr(i, 2);
 		std::string target_string_len3 = input.substr(i, 3);
 		if ( std::find(vec.begin(), vec.end(), target_string_len2) == vec.end() &&
 				std::find(vec.begin(), vec.end(), target_string_len3) != vec.end())

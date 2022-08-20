@@ -8,25 +8,17 @@ int main()
 	std::cin >> A;
 	std::cin >> B;
 	std::cin >> C;
+	
+	int result = A / (C - B) + 1;
 
-	if (B > C)
+	if (result > 0)
 	{
-		std::cout << -1 << std::endl;
-		return 0;
+		std::cout << result << std::endl; 
 	}
-
-	for (int i = 0; i < std::numeric_limits<int>::max(); i++)
+	else
 	{
-		int result = C * i - (A + B * i);
-
-		if (result > 0)
-		{
-			std::cout << i << std::endl;
-			return 0;
-		}
+		std::cout << -1 << std::endl; 
 	}
-
-	std::cout << -1 << std::endl;
 
 	return 0;
 }

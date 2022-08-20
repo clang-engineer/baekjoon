@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <limits>
 
 int main()
 {
@@ -8,6 +7,12 @@ int main()
 	std::cin >> A;
 	std::cin >> B;
 	std::cin >> C;
+
+	if (A <= 0 || B <= 0 || C <= 0)
+	{
+		std::cout << -1 << std::endl; 
+		return 0;
+	}
 	
 	int result = A / (C - B) + 1;
 

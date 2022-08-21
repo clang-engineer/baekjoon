@@ -7,14 +7,25 @@ int main()
 	
 	std::cin >> num;
 
+	if (num == 1) {
+		std::cout << 1 << std::endl;
+		return 0;
+	}
+
+	if (num >= 2 && num <= 7) {
+		std::cout << 2 << std::endl;
+		return 0;
+	}
+	
 	int start = 2;
-	int end = 1;
-	for (int i = 0; i < num / 6; i++) 
+	int end = 7;
+
+	for (int i = 1; i < num; i++) 
 	{
 		start += 6 * i;
 		end += 6 * (i + 1);
 
-		if (start <= num && num <= end)
+		if (num >= start && num <= end)
 		{
 			std::cout << i + 2 << std::endl;
 			break;

@@ -24,14 +24,24 @@ int main()
 			continue;
 		}
 
+		if (elem == 2)
+		{
+			result_count++;
+			continue;
+		}
+
+		bool isprime = true;
 		for (int i = 2; i <= elem / 2 + 1; i++)
 		{
-			if (elem % i != 0)
+			if (elem % i == 0)
 			{
-				result_count++;
+				isprime = false;
 				break;
 			}
 		}
+
+		if (isprime)
+			result_count++;
 
 	}
 

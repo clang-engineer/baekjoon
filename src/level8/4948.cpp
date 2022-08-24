@@ -42,6 +42,11 @@ bool is_prime(int num)
 		return true;
 	}
 
+	if (num % 2 == 0 || num % 3 == 0 || num % 5 == 0)
+	{
+		return false;
+	}
+
 	bool is_prime = true;
 	for (int i = 2; i <= std::sqrt(num); i++)
 	{

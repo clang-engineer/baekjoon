@@ -17,11 +17,43 @@ int main()
 
 		int count = 0;
 
-		for (int i = num + 1; i <= 2 * num; i++)
+		int max_num = 2 * num;
+		bool* prime_arr = new bool[max_num];
+
+		for (int i = 2; i <= max_num; i++)
 		{
+			prime_arr[i] = true;
+		}
+
+		for (int j = 2; j <= max_num / 2; j++)
+		{
+			prime_arr[j * 2] = false;
+		}
+
+		for (int j = 2; j <= max_num / 3; j++)
+		{
+			prime_arr[j * 3] = false;
+		}
+
+		for (int j = 2; j <= max_num / 5; j++)
+		{
+			prime_arr[j * 5] = false;
+		}
+
+		for (int j = 2; j <= max_num / 7; j++)
+		{
+			prime_arr[j * 7] = false;
+		}
+
+		for (int i = num + 1; i <= max_num; i++)
+		{
+			if (!prime_arr[i]) {
+				continue;
+			}
 			if (is_prime(i))
 			{
 				count += 1;
+				continue;
 			}
 		}
 

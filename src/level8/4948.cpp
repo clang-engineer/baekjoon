@@ -18,7 +18,7 @@ int main()
 		int count = 0;
 
 		int max_num = 2 * num;
-		bool* prime_arr = new bool[max_num];
+		bool* prime_arr = new bool[max_num + 1];
 
 		for (int i = 2; i <= max_num; i++)
 		{

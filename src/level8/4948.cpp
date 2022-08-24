@@ -25,23 +25,11 @@ int main()
 			prime_arr[i] = true;
 		}
 
-		for (int j = 2; j <= max_num / 2; j++)
-		{
-			prime_arr[j * 2] = false;
-		}
-
-		for (int j = 2; j <= max_num / 3; j++)
-		{
-			prime_arr[j * 3] = false;
-		}
-
-		for (int j = 2; j <= max_num / 5; j++)
-		{
-			prime_arr[j * 5] = false;
-		}
-
 		for (int j = 2; j <= max_num / 7; j++)
 		{
+			prime_arr[j * 2] = false;
+			prime_arr[j * 3] = false;
+			prime_arr[j * 5] = false;
 			prime_arr[j * 7] = false;
 		}
 

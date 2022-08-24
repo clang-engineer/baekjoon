@@ -49,17 +49,18 @@ int main()
 		{
 			if (!prime_arr[i]) {
 				continue;
-			}
-			if (is_prime(i))
-			{
-				count += 1;
-				continue;
-			}
+			} else {
+				if (is_prime(i))
+				{
+					count += 1;
+					continue;
+				}
+			} 
 		}
 
 		std::cout << count << "\n";
 	}
-    return 0;
+	return 0;
 }
 
 bool is_prime(int num)

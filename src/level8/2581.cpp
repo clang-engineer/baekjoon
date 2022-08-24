@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <cmath> 
 
 bool is_prime(int num);
 
@@ -10,7 +11,13 @@ int main()
 	std::cin >> M >> N;
 
 	std::vector<int> vec; 
-	int sum, min = N;
+	int sum = 0, min = N;
+
+	if (M > N)
+	{
+		std::cout << -1 << std::endl;
+		return 0;
+	}
 
 	for (int i = M; i <= N; i++)
 	{
@@ -47,13 +54,13 @@ bool is_prime(int num)
 		return false;
 	}
 
-	if (num == 2)
+	if (num == 2 || num == 3)
 	{
 		return true;
 	}
 
 	bool isprime = true;
-	for (int i = 2; i <= num / 2 + 1; i++)
+	for (int i = 2; i <= sqrt(num); i++)
 	{
 		if (num % i == 0)
 		{

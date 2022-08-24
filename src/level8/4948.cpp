@@ -25,7 +25,7 @@ int main()
 			}
 		}
 
-		std::cout << count << std::endl;
+		std::cout << count << "\n";
 	}
     return 0;
 }

@@ -6,14 +6,14 @@ int get_row_num(int position);
 int main()
 {
 
-	int input;
+	unsigned int input;
 	std::cin >> input;
 
-	int row_num = get_row_num(input);
+	unsigned int row_num = get_row_num(input);
 
-	int row_num_index = 1 + row_num * (row_num - 1) /2;
+	unsigned int row_num_index = 1 + row_num * (row_num - 1) /2;
 
-	int gap = input - row_num_index;
+	unsigned int gap = input - row_num_index;
 
 
 	if (row_num % 2 == 0)

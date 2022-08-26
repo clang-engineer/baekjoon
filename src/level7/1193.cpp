@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 
-int get_row_num(int position);
+unsigned int get_row_num(unsigned int position);
 
 int main()
 {
@@ -28,13 +28,13 @@ int main()
 	return 0;
 }
 
-int get_row_num(int position)
+unsigned int get_row_num(unsigned int position)
 {
-	int row = 0;
+	unsigned int row = 0;
 
 	for (int i = 1; i <= position; i++)
 	{
-		int value = 1 + i * (i - 1) / 2;
+		unsigned int value = 1 + i * (i - 1) / 2;
 
 		if (value <= position)
 		{

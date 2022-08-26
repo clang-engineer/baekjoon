@@ -15,7 +15,7 @@ int main()
 
 	int gap = input - row_num_index;
 
-	std:: cout << row_num - gap << "/" << 1 + gap << std::endl;
+	std:: cout << 1 + gap << "/" << row_num - gap << std::endl;
 
 	return 0;
 }

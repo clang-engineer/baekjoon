@@ -13,6 +13,10 @@ int main()
 
 	for (int i = 0; i < input.length() - 2; i++)
 	{
+		if (input.length() < 3)
+		{
+			break;
+		}
 		std::string target_string = input.substr(i, 3);
 		if (std::find(vec.begin(), vec.end(), target_string) != vec.end())
 		{
@@ -21,8 +25,13 @@ int main()
 		}
 	}
 
+
 	for (int i = 0; i < input.length() - 1; i++)
 	{
+		if (input.length() < 2)
+		{
+			break;
+		}
 		std::string target_string = input.substr(i, 2);
 		if (std::find(vec.begin(), vec.end(), target_string) != vec.end())
 		{

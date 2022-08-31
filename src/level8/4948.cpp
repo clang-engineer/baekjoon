@@ -23,14 +23,17 @@ int main()
 		for (int i = 2; i <= max_num; i++)
 		{
 			prime_arr[i] = true;
-		}
-
-		for (int j = 2; j <= max_num / 7; j++)
-		{
-			prime_arr[j * 2] = false;
-			prime_arr[j * 3] = false;
-			prime_arr[j * 5] = false;
-			prime_arr[j * 7] = false;
+		    if (i * 2 <= max_num) prime_arr[i * 2] = false;
+		    if (i * 3 <= max_num) prime_arr[i * 3] = false;
+		    if (i * 4 <= max_num) prime_arr[i * 4] = false;
+		    if (i * 5 <= max_num) prime_arr[i * 5] = false;
+		    if (i * 6 <= max_num) prime_arr[i * 6] = false;
+		    if (i * 7 <= max_num) prime_arr[i * 7] = false;
+		    if (i * 11 <= max_num) prime_arr[i * 11] = false;
+		    if (i * 13 <= max_num) prime_arr[i * 13] = false;
+		    if (i * 17 <= max_num) prime_arr[i * 17] = false;
+		    if (i * 19 <= max_num) prime_arr[i * 19] = false;
+		    if (i * 23 <= max_num) prime_arr[i * 23] = false;
 		}
 
 		for (int i = num + 1; i <= max_num; i++)

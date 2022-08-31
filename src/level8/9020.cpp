@@ -18,6 +18,11 @@ int main()
 		int num;
 		std::cin >> num;
 
+		if (num % 2 != 0)
+		{
+			return 0;
+		}
+
 		std::set<std::pair<int, int>> prime_factors = get_prime_factors(num);
 
 		std::pair<int, int> result = find_min_gap_pair_in_set(prime_factors);
@@ -48,7 +53,7 @@ bool is_prime(int num)
 std::set<std::pair<int, int>> get_prime_factors(int num)
 {
 	std::set<std::pair<int, int>> prime_factors;
-	for (int i = 2; i <= num; i++)
+	for (int i = 2; i <= num / 2; i++)
 	{
 		if (is_prime(i) && is_prime(num - i))
 		{

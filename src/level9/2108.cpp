@@ -4,68 +4,85 @@
 #include <algorithm>
 #include <map>
 
-
-int get_avg(std::vector<int>& vec) {
-	return std::accumulate(vec.begin(), vec.end(), 0) / vec.size();
+int get_median(std::vector<int> &v) {
+	std::sort(v.begin(), v.end());
+	return v[v.size() / 2];
 }
 
-int get_max(std::vector<int>& vec) {
-	return *std::max_element(vec.begin(), vec.end());
+int get_average(std::vector<int> &v) {
+	return std::round(std::accumulate(v.begin(), v.end(), 0) / v.size());
 }
 
-int get_min(std::vector<int>& vec) {
-	return *std::min_element(vec.begin(), vec.end());
+int get_range(std::vector<int> &v) {
+	return *std::max_element(v.begin(), v.end()) - *std::min_element(v.begin(), v.end());
 }
 
-int get_median(std::vector<int>& vec) {
-	std::sort(vec.begin(), vec.end());
-	return vec[vec.size() / 2];
+std::map<int, int> get_mode(std::vector<int> &v) {
+	std::map<int, int> m;
+	for (auto &i : v) {
+		if (m.find(i) == m.end()) {
+			m[i] = 1;
+		} else {
+			m[i]++;
+		}
+	}
+	return m;
 }
 
-void printMap(std::map<int, int> sampleMap)
-{
-	std::map<int, int>::iterator itr;
-    for (itr = sampleMap.begin();
-        itr != sampleMap.end();
-        ++itr) {
-		std::cout << itr->first
-            << " = " << itr->second << ", ";
-    }
-	std::cout << std::endl;
+int get_max_mode(std::map<int, int> &m) {
+	int max = 0;
+	for (auto &i : m) {
+		if (i.second > max) {
+			max = i.second;
+		}
+	}
+	return max;
+}
+
+int get_count_in_map_by_value(std::map<int, int> &m, int value) {
+	int count = 0;
+	for (auto &i : m) {
+		if (i.second == value) {
+			count++;
+		}
+	}
+	return count;
+}
+
+int get_second_smallest_in_vector(std::vector<int> &v) {
+	std::sort(v.begin(), v.end());
+	return v[1];
 }
 
 int main()
 {
 	int total_num;
-
 	std::cin >> total_num;
 
 	std::vector<int> vec;
-
-	for (int i = 0; i < total_num; i++)
+	while (total_num > 0) 
 	{
-		int num;
-		std::cin >> num;
-		vec.push_back(num);
-	}
-	
-	int max = vec[0];
-	int min = vec[0];
-	std::map<int, int> counter;
-	for (auto iter = vec.begin(); iter != vec.end(); iter++)
-	{
-		if (*iter > max)
-			max = *iter;
-		if (*iter < min)
-			min = *iter;
+		int i;
+		std::cin >> i;
 
-		if (counter.find(*iter) == counter.end())
-			counter[*iter] = 1;
-		else
-			counter[*iter]++;
+		vec.push_back(i);
+		total_num--;
 	}
 
-	printMap(counter);
+	std::cout << "===" << std::endl;
+	std::cout << get_average(vec) << std::endl;
+	std::cout << get_median(vec) << std::endl;
+	std::map<int, int> mode = get_mode(vec);
+	if (vec.size() == 1) {
+		std::cout << vec[0] << std::endl;
+	}
+	else if (get_count_in_map_by_value(mode, get_max_mode(mode)) > 1) {
+		std::cout << get_second_smallest_in_vector(vec) << std::endl;
+	} else {
+		std::cout << get_max_mode(mode) << std::endl;
+	}
+
+	std::cout << get_range(vec) << std::endl;
 
     return 0;
 }

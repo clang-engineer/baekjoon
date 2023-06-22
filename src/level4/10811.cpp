@@ -1,12 +1,12 @@
 #include <iostream>
 #include <vector>
 
-void reversing(std::vector<int> &v, int start, int end) {
+void reversing(std::vector<int> *v, int start, int end) {
   int temp;
   while (start < end) {
-    temp = v[start];
-    v[start] = v[end];
-    v[end] = temp;
+    temp = (*v)[start];
+    (*v)[start] = (*v)[end];
+    (*v)[end] = temp;
     start++;
     end--;
   }
@@ -26,7 +26,7 @@ int main() {
   for (int i = 0; i < M; i++) {
     int start, end;
     std::cin >> start >> end;
-    reversing(v, start - 1, end - 1);
+    reversing(&v, start - 1, end - 1);
   }
 
   for (int i = 0; i < N; i++) {

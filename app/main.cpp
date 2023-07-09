@@ -1,15 +1,16 @@
 #include <iostream>
 
-#include "5086.h"
+#include "2501.h"
 
 int main() {
-    for (int first, second; std::cin >> first >> second;) {
 
-        if (first == 0 && second == 0) {
-            break;
-        }
-        std::cout << bj5086::Solution().solution(first, second) << std::endl;
-    }
+    int n, k;
+
+    std::cin >> n >> k;
+
+    _2501::Solution s = _2501::Solution(n);
+    std::cout << s.GetKthFactor(k) << std::endl;
+
     return 0;
 }
 

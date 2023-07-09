@@ -1,18 +1,15 @@
 #include <iostream>
-#include <vector>
 
-#include "10798.h"
+#include "5086.h"
 
 int main() {
-    std::vector<std::string> list;
+    for (int first, second; std::cin >> first >> second;) {
 
-    for (int i = 0; i < 5; ++i) {
-        std::string str;
-        std::cin >> str;
-        list.push_back(str);
+        if (first == 0 && second == 0) {
+            break;
+        }
+        std::cout << bj5086::Solution().solution(first, second) << std::endl;
     }
-    bj10798::Solution s;
-    std::cout << s.GetVerticalConcatString(&list) << std::endl;
     return 0;
 }
 

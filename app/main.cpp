@@ -1,15 +1,14 @@
 #include <iostream>
 
-#include "2501.h"
+#include "_27323.h"
 
 int main() {
 
-    int n, k;
+    int a, b;
 
-    std::cin >> n >> k;
-
-    _2501::Solution s = _2501::Solution(n);
-    std::cout << s.GetKthFactor(k) << std::endl;
+    std::cin >> a >> b;
+    _27323::Rectangle r(a, b);
+    std::cout << r.GetSize() << std::endl;
 
     return 0;
 }

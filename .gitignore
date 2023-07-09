@@ -36,3 +36,4 @@ build
 tags
 .idea/*
 .vscode/*
+cmake-build-debug/*

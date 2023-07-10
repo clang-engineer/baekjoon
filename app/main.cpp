@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 
-#include "_2563.h"
+#include "_2720.h"
 
 int main() {
 
@@ -9,19 +9,15 @@ int main() {
 
     std::cin >> N;
 
-    std::vector<_2563::Coord> paper;
-
     for (int i = 0; i < N; i++) {
-        int x, y;
+        float total_payment;
+        std::cin >> total_payment;
 
-        std::cin >> x >> y;
+        _2720::Solution s(total_payment);
+        std::vector<int> result = s.GetChange();
 
-        _2563::Coord coord = {x, y};
-        paper.push_back(coord);
+        std::cout << result[0] << " " << result[1] << " " << result[2] << " " << result[3] << std::endl;
     }
-
-    _2563::Solution s(paper);
-    std::cout << s.GetNonOverlapArea() << std::endl;
 
     return 0;
 }

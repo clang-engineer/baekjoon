@@ -1,15 +1,27 @@
 #include <iostream>
+#include <vector>
 
-#include "2501.h"
+#include "_2563.h"
 
 int main() {
 
-    int n, k;
+    int N;
 
-    std::cin >> n >> k;
+    std::cin >> N;
 
-    _2501::Solution s = _2501::Solution(n);
-    std::cout << s.GetKthFactor(k) << std::endl;
+    std::vector<_2563::Coord> paper;
+
+    for (int i = 0; i < N; i++) {
+        int x, y;
+
+        std::cin >> x >> y;
+
+        _2563::Coord coord = {x, y};
+        paper.push_back(coord);
+    }
+
+    _2563::Solution s(paper);
+    std::cout << s.GetNonOverlapArea() << std::endl;
 
     return 0;
 }

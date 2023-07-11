@@ -1,18 +1,14 @@
 #include <iostream>
 
-#include "_9506.h"
+#include "_15894.h"
 
 int main() {
 
-    int target_number;
-    while (std::cin >> target_number) {
-        if (target_number == -1) {
-            break;
-        }
+    long target_number;
+    std::cin >> target_number;
 
-        _9506::Solution s(target_number);
-        std::cout << s.GetResultString() << std::endl;
-    }
+    _15894::Solution s(target_number);
+    std::cout << s.GetResult() << std::endl;
 
     return 0;
 }

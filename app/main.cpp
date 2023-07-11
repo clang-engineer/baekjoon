@@ -1,22 +1,17 @@
 #include <iostream>
-#include <vector>
 
-#include "_2720.h"
+#include "_9506.h"
 
 int main() {
 
-    int N;
+    int target_number;
+    while (std::cin >> target_number) {
+        if (target_number == -1) {
+            break;
+        }
 
-    std::cin >> N;
-
-    for (int i = 0; i < N; i++) {
-        float total_payment;
-        std::cin >> total_payment;
-
-        _2720::Solution s(total_payment);
-        std::vector<int> result = s.GetChange();
-
-        std::cout << result[0] << " " << result[1] << " " << result[2] << " " << result[3] << std::endl;
+        _9506::Solution s(target_number);
+        std::cout << s.GetResultString() << std::endl;
     }
 
     return 0;

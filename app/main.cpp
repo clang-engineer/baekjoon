@@ -1,26 +1,16 @@
 #include <iostream>
-#include <vector>
 
-#include "_9063.h"
+#include "_10101.h"
 
 int main() {
 
-    int count;
+    int angle1, angle2, angle3;
 
-    std::cin >> count;
+    std::cin >> angle1 >> angle2 >> angle3;
 
-    std::vector<std::pair<int, int>> coordinates;
+    _10101::Solution solution;
 
-    for (int i = 0; i < count; i++) {
-        int x, y;
-        std::cin >> x >> y;
-        coordinates.push_back(std::make_pair(x, y));
-    }
-
-    if (count > 1) {
-        _9063::Solution solution(coordinates);
-        std::cout << solution.GetMaxWidth() << std::endl;
-    }
+    std::cout << solution.GetTriangleType(angle1, angle2, angle3) << std::endl;
 
     return 0;
 }

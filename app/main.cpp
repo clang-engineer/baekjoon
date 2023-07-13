@@ -1,14 +1,26 @@
 #include <iostream>
+#include <vector>
 
-#include "_15894.h"
+#include "_9063.h"
 
 int main() {
 
-    long target_number;
-    std::cin >> target_number;
+    int count;
 
-    _15894::Solution s(target_number);
-    std::cout << s.GetResult() << std::endl;
+    std::cin >> count;
+
+    std::vector<std::pair<int, int>> coordinates;
+
+    for (int i = 0; i < count; i++) {
+        int x, y;
+        std::cin >> x >> y;
+        coordinates.push_back(std::make_pair(x, y));
+    }
+
+    if (count > 1) {
+        _9063::Solution solution(coordinates);
+        std::cout << solution.GetMaxWidth() << std::endl;
+    }
 
     return 0;
 }

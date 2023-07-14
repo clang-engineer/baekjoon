@@ -1,17 +1,23 @@
 #include <iostream>
 
-#include "_10101.h"
+#include "_5073.h"
 
 int main() {
 
-    int angle1, angle2, angle3;
+    while(true) {
+        int side1, side2, side3;
 
-    std::cin >> angle1 >> angle2 >> angle3;
+        std::cin >> side1 >> side2 >> side3;
 
-    _10101::Solution solution;
+        if (side1 == 0 && side2 == 0 && side3 == 0) {
+            break;
+        }
 
-    std::cout << solution.GetTriangleType(angle1, angle2, angle3) << std::endl;
+        _5073::Solution solution = _5073::Solution();
 
+        std::cout <<  solution.GetTriangleType(side1, side2, side3) << std::endl;
+
+    }
     return 0;
 }
 

@@ -1,15 +1,21 @@
 #include <iostream>
 
-#include "_27323.h"
+#include "_5073.h"
 
 int main() {
+  while (true) {
+    int side1, side2, side3;
 
-    int a, b;
+    std::cin >> side1 >> side2 >> side3;
 
-    std::cin >> a >> b;
-    _27323::Rectangle r(a, b);
-    std::cout << r.GetSize() << std::endl;
+    if (side1 == 0 && side2 == 0 && side3 == 0) {
+      break;
+    }
 
-    return 0;
+    _5073::Solution solution = _5073::Solution();
+
+    std::cout << solution.GetTriangleType(side1, side2, side3) << std::endl;
+  }
+  return 0;
 }
 

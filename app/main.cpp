@@ -1,21 +1,25 @@
 #include <iostream>
 
-#include "_5073.h"
+#include "_18870.h"
+#include <vector>
 
 int main() {
-  while (true) {
-    int side1, side2, side3;
+    int n;
+    std::cin >> n;
 
-    std::cin >> side1 >> side2 >> side3;
-
-    if (side1 == 0 && side2 == 0 && side3 == 0) {
-      break;
+    std::vector<int> input;
+    for (int i = 0; i < n; i++) {
+        int x;
+        std::cin >> x;
+        input.push_back(x);
     }
 
-    _5073::Solution solution = _5073::Solution();
+    _18870::Solution s(input);
+    std::vector<int> result = s.GetResult();
 
-    std::cout << solution.GetTriangleType(side1, side2, side3) << std::endl;
-  }
-  return 0;
+    for (int i = 0; i < result.size(); i++) {
+        std::cout << result[i] << " ";
+    }
+    return 0;
 }
 

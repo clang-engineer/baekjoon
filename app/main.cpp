@@ -2,35 +2,44 @@
 #include <vector>
 #include <map>
 
-#include "_1764.h"
+#include "_10816.h"
 
 int main() {
-    int N, M;
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+    std::cout.tie(nullptr);
 
-    std::cin >> N >> M;
+    int N;
 
-    std::vector<std::string> heard;
-    std::vector<std::string> seen;
+    std::cin >> N;
+
+    std::map<int, int> map;
 
     for (int i = 0; i < N; ++i) {
-        std::string s;
-        std::cin >> s;
-        heard.push_back(s);
+        int num;
+        std::cin >> num;
+        if (map.find(num) != map.end()) {
+            map[num] += 1;
+        } else {
+            map[num] = 1;
+        }
     }
+
+    int M;
+
+    std::cin >> M;
+
+    std::vector<int> vec;
 
     for (int i = 0; i < M; ++i) {
-        std::string s;
-        std::cin >> s;
-        seen.push_back(s);
+        int num;
+        std::cin >> num;
+        vec.push_back(num);
     }
 
-    _1764::Solution solution(std::move(heard), std::move(seen));
+    _10816::Solution solution(map, vec);
+    std::cout << solution.GetNumCountResult() << std::endl;
 
-    std::vector<std::string> result = solution.GetResult();
 
-    std::cout << result.size() << std::endl;
-    for (const auto &r : result) {
-        std::cout << r << std::endl;
-    }
 }
 

@@ -1,25 +1,26 @@
 #include <iostream>
-
-#include "_18870.h"
 #include <vector>
+#include <map>
+
+#include "_7785.h"
 
 int main() {
     int n;
     std::cin >> n;
 
-    std::vector<int> input;
-    for (int i = 0; i < n; i++) {
-        int x;
-        std::cin >> x;
-        input.push_back(x);
+    std::map<std::string, std::string> input;
+    for (int i = 0; i < n; ++i) {
+        std::string name, status;
+        std::cin >> name >> status;
+        input[name] = status;
     }
 
-    _18870::Solution s(input);
-    std::vector<int> result = s.GetResult();
-
-    for (int i = 0; i < result.size(); i++) {
-        std::cout << result[i] << " ";
+    _7785::Solution solution(input);
+    std::vector<std::string> result = solution.GetResult();
+    for (const auto &i : result) {
+        std::cout << i << "\n";
     }
+
     return 0;
 }
 

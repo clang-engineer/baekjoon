@@ -1,8 +1,7 @@
 #include <iostream>
 #include <vector>
-#include <map>
-
-#include "_10816.h"
+#include <algorithm>
+#include <unordered_map>
 
 int main() {
     std::ios::sync_with_stdio(false);
@@ -13,33 +12,29 @@ int main() {
 
     std::cin >> N;
 
-    std::map<int, int> map;
+    std::unordered_map<std::string, std::string> input;
 
-    for (int i = 0; i < N; ++i) {
-        int num;
-        std::cin >> num;
-        if (map.find(num) != map.end()) {
-            map[num] += 1;
+    for (int i = 0; i < N; i++) {
+        std::string name, status;
+        std::cin >> name >> status;
+
+        if (status == "enter") {
+            input[name] = status;
         } else {
-            map[num] = 1;
+            input.erase(name);
         }
     }
 
-    int M;
 
-    std::cin >> M;
-
-    std::vector<int> vec;
-
-    for (int i = 0; i < M; ++i) {
-        int num;
-        std::cin >> num;
-        vec.push_back(num);
+    std::vector<std::string> result;
+    for (const auto &i: input) {
+        result.push_back(i.first);
     }
 
-    _10816::Solution solution(map, vec);
-    std::cout << solution.GetNumCountResult() << std::endl;
+    std::sort(result.begin(), result.end(), std::greater<std::string>());
 
-
+    for (const auto &i: result) {
+        std::cout << i << "\n";
+    }
 }
 

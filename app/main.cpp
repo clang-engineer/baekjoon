@@ -1,35 +1,18 @@
-#include <iostream>
-#include <vector>
-#include <unordered_map>
-#include <string>
+#include "_1934.h"
 
-#include "_1620.h"
+#include <iostream>
 
 int main() {
-    int N, M;
+    int N;
+    std::cin >> N;
 
-    std::ios::sync_with_stdio(false);
-    std::cin.tie(nullptr);
-    std::cout.tie(nullptr);
-
-    std::cin >> N >> M;
-
-    std::unordered_map<std::string, int> m;
-    std::vector<std::string> v;
-
-    for (int i = 0; i < N; i++) {
-        std::string s;
-        std::cin >> s;
-        m[s] = i;
-        v.push_back(s);
+    for (int i = 0; i < N; ++i) {
+        int A, B;
+        std::cin >> A >> B;
+        _1934::Solution solution(A, B);
+        std::cout << solution.GetAnswer() << '\n';
     }
 
-    _1620::Solution solution(m, v);
-
-    for (int i = 0; i < M; i++) {
-        std::string s;
-        std::cin >> s;
-        std::cout << solution.FindMatch(s) << '\n';
-    }
+    return 0;
 }
 

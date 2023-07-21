@@ -1,13 +1,26 @@
-#include "_1735.h"
+#include "_2458.h"
 
 #include <iostream>
+#include <vector>
 
 int main() {
-    int a_child, a_parent, b_child, b_parent;
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+    std::cout.tie(nullptr);
 
-    std::cin >> a_child >> a_parent >> b_child >> b_parent;
+    int N;
 
-    _1735::Solution solution(a_child, a_parent, b_child, b_parent);
+    std::cin >> N;
+
+    std::vector<int> vec;
+    for (int i = 0; i < N; i++) {
+        int tmp;
+        std::cin >> tmp;
+        vec.push_back(tmp);
+    }
+
+    _2458::Solution solution(vec);
+
     std::cout << solution.GetAnswer() << '\n';
 
     return 0;

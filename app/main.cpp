@@ -2,21 +2,20 @@
 #include <string>
 #include <vector>
 
-#include "_2745.h"
+#include "_11005.h"
 
 int main() {
   std::ios::sync_with_stdio(false);
   std::cin.tie(nullptr);
   std::cout.tie(nullptr);
 
-  std::string N;
-  int B;
+  int number, base;
 
-  std::cin >> N >> B;
+  std::cin >> number >> base;
 
-  _2745::Solution solution;
+  _11005::Solution solution;
 
-  std::cout << solution.GetDecimalNumber(N, B) << '\n';
+  std::cout << solution.GetBaseNumber(number, base) << '\n';
   return 0;
 }
 

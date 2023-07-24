@@ -1,21 +1,23 @@
 #include <iostream>
-#include <string>
-#include <vector>
 
-#include "_11005.h"
+#include "_17103.h"
 
 int main() {
   std::ios::sync_with_stdio(false);
   std::cin.tie(nullptr);
   std::cout.tie(nullptr);
 
-  int number, base;
+  int N;
 
-  std::cin >> number >> base;
+  std::cin >> N;
 
-  _11005::Solution solution;
+  for (int i = 0; i < N; i++) {
+    int a;
+    std::cin >> a;
+    _17103::Solution solution = _17103::Solution(a);
+    std::cout << solution.GetGoldBachPartitionNum() << '\n';
+  }
 
-  std::cout << solution.GetBaseNumber(number, base) << '\n';
   return 0;
 }
 

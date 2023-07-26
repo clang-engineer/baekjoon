@@ -1,23 +1,19 @@
 #include <iostream>
 
-#include "_17103.h"
+#include "_11050.h"
 
 int main() {
   std::ios::sync_with_stdio(false);
   std::cin.tie(nullptr);
   std::cout.tie(nullptr);
 
-  int N;
+  int N, K;
 
-  std::cin >> N;
+  std::cin >> N >> K;
 
-  for (int i = 0; i < N; i++) {
-    int a;
-    std::cin >> a;
-    _17103::Solution solution = _17103::Solution(a);
-    std::cout << solution.GetGoldBachPartitionNum() << '\n';
-  }
+  _11050::Solution solution;
 
+  std::cout << solution.GetBinomialCoefficient(N, K) << '\n';
   return 0;
 }
 

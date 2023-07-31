@@ -1,19 +1,23 @@
 #include <iostream>
 
-#include "_11050.h"
+#include "../include/_4134.h"
 
 int main() {
-  std::ios::sync_with_stdio(false);
-  std::cin.tie(nullptr);
-  std::cout.tie(nullptr);
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+    std::cout.tie(nullptr);
 
-  int N, K;
+    long long N;
 
-  std::cin >> N >> K;
+    std::cin >> N;
 
-  _11050::Solution solution;
 
-  std::cout << solution.GetBinomialCoefficient(N, K) << '\n';
-  return 0;
+    _4134::Solution solution;
+    for (long long i = 0; i < N; i++) {
+        long long num;
+        std::cin >> num;
+        std::cout << solution.GetNextDecimal(num) << '\n';
+    }
+    return 0;
 }
 

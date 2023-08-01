@@ -1,4 +1,3 @@
-#include <cmath>
 #include <iostream>
 
 int main() {
@@ -10,7 +9,7 @@ int main() {
 
   std::cin >> num;
 
-  std::cout << std::pow(2, num) << '\n';
+  std::cout << num * (num - 1) << '\n';
 
   return 0;
 }

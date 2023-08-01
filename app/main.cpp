@@ -1,23 +1,28 @@
 #include <iostream>
 
-#include "../include/_4134.h"
+#include "../include/_1010.h"
 
 int main() {
-    std::ios::sync_with_stdio(false);
-    std::cin.tie(nullptr);
-    std::cout.tie(nullptr);
+  std::ios::sync_with_stdio(false);
+  std::cin.tie(nullptr);
+  std::cout.tie(nullptr);
 
-    long long N;
+  int total;
 
-    std::cin >> N;
+  std::cin >> total;
 
+  while (total > 0) {
+    int N, M;
 
-    _4134::Solution solution;
-    for (long long i = 0; i < N; i++) {
-        long long num;
-        std::cin >> num;
-        std::cout << solution.GetNextDecimal(num) << '\n';
-    }
-    return 0;
+    std::cin >> N >> M;
+
+    _1010::Solution solution;
+
+    std::cout << solution.GetCombination(N, M) << std::endl;
+
+    --total;
+  }
+
+  return 0;
 }
 

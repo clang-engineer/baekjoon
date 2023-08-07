@@ -1,5 +1,6 @@
+#include "../include/_9012.h"
 #include <iostream>
-#include <stack>
+#include <string>
 
 int main() {
   std::ios::sync_with_stdio(false);
@@ -9,28 +10,16 @@ int main() {
   int N;
   std::cin >> N;
 
-  std::stack<int> s;
-
-  for (int i = 0; i < N; i++) {
-    int num;
-
-    std::cin >> num;
-
-    if (num == 0) {
-      s.pop();
+  for (int i = 0; i < N; ++i) {
+    std::string str;
+    std::cin >> str;
+    int result = _9012::IsValidParenthesisString(str);
+    if (result == 0) {
+      std::cout << "NO\n";
     } else {
-      s.push(num);
+      std::cout << "YES\n";
     }
   }
-
-  int sum = 0;
-
-  while (!s.empty()) {
-    sum += s.top();
-    s.pop();
-  }
-
-  std::cout << sum << '\n';
 
   return 0;
 }

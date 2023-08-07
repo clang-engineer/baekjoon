@@ -12,45 +12,26 @@ int main() {
   std::stack<int> s;
 
   for (int i = 0; i < N; i++) {
-    int cmd;
-    std::cin >> cmd;
+    int num;
 
-    switch (cmd) {
-    case 1:
-      int x;
-      std::cin >> x;
-      s.push(x);
-      break;
-    case 2:
-      if (!s.empty()) {
-        int top = s.top();
-        std::cout << top << '\n';
-        s.pop();
-      } else {
-        std::cout << -1 << '\n';
-      }
-      break;
-    case 3:
-      std::cout << s.size() << '\n';
-      break;
-    case 4:
-      if (s.empty()) {
-        std::cout << 1 << '\n';
-      } else {
-        std::cout << 0 << '\n';
-      }
-      break;
-    case 5:
-      if (!s.empty()) {
-        std::cout << s.top() << '\n';
-      } else {
-        std::cout << -1 << '\n';
-      }
-      break;
-    default:
-      break;
+    std::cin >> num;
+
+    if (num == 0) {
+      s.pop();
+    } else {
+      s.push(num);
     }
   }
+
+  int sum = 0;
+
+  while (!s.empty()) {
+    sum += s.top();
+    s.pop();
+  }
+
+  std::cout << sum << '\n';
+
   return 0;
 }
 

@@ -1,5 +1,5 @@
-#include "../include/_4949.h"
 #include <iostream>
+#include <queue>
 #include <string>
 
 int main() {
@@ -7,14 +7,47 @@ int main() {
   std::cin.tie(nullptr);
   std::cout.tie(nullptr);
 
-  std::string input;
+  int N;
 
-  while (input != ".") {
-    std::getline(std::cin, input);
-    if (input == ".") {
-      break;
+  std::cin >> N;
+
+  std::queue<int> q;
+
+  while (N > 0) {
+    std::string cmd;
+
+    std::cin >> cmd;
+
+    if (cmd == "push") {
+      int num;
+      std::cin >> num;
+      q.push(num);
+    } else if (cmd == "pop") {
+      if (q.empty()) {
+        std::cout << -1 << '\n';
+      } else {
+        std::cout << q.front() << '\n';
+        q.pop();
+      }
+    } else if (cmd == "size") {
+      std::cout << q.size() << '\n';
+    } else if (cmd == "empty") {
+      std::cout << q.empty() << '\n';
+    } else if (cmd == "front") {
+      if (q.empty()) {
+        std::cout << -1 << '\n';
+      } else {
+        std::cout << q.front() << '\n';
+      }
+    } else if (cmd == "back") {
+      if (q.empty()) {
+        std::cout << -1 << '\n';
+      } else {
+        std::cout << q.back() << '\n';
+      }
     }
-    std::cout << _4949::IsBalanced(input) << std::endl;
+
+    N--;
   }
 
   return 0;

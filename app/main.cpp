@@ -1,4 +1,4 @@
-#include "../include/_9012.h"
+#include "../include/_4949.h"
 #include <iostream>
 #include <string>
 
@@ -7,18 +7,14 @@ int main() {
   std::cin.tie(nullptr);
   std::cout.tie(nullptr);
 
-  int N;
-  std::cin >> N;
+  std::string input;
 
-  for (int i = 0; i < N; ++i) {
-    std::string str;
-    std::cin >> str;
-    int result = _9012::IsValidParenthesisString(str);
-    if (result == 0) {
-      std::cout << "NO\n";
-    } else {
-      std::cout << "YES\n";
+  while (input != ".") {
+    std::getline(std::cin, input);
+    if (input == ".") {
+      break;
     }
+    std::cout << _4949::IsBalanced(input) << std::endl;
   }
 
   return 0;

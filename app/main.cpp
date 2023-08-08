@@ -6,9 +6,9 @@ int main() {
   std::cin.tie(nullptr);
   std::cout.tie(nullptr);
 
-  int N;
+  int N, K;
 
-  std::cin >> N;
+  std::cin >> N >> K;
 
   std::queue<int> q;
 
@@ -16,20 +16,25 @@ int main() {
     q.push(i);
   }
 
-  int index = 1;
+  std::cout << "<";
 
-  while (q.size() > 1) {
-    if (index % 2 == 1) {
-      q.pop();
-    } else {
-      int temp = q.front();
-      q.pop();
-      q.push(temp);
-    }
+  int index = 0;
+
+  while (!q.empty()) {
     index++;
+    if (q.size() == 1) {
+      std::cout << q.front() << ">";
+      std::cout << "\n";
+      break;
+    } else if (index == K) {
+      std::cout << q.front() << ", ";
+      q.pop();
+      index = 0;
+    } else {
+      q.push(q.front());
+      q.pop();
+    }
   }
-
-  std::cout << q.front() << '\n';
 
   return 0;
 }

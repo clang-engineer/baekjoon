@@ -1,41 +1,52 @@
 #include <iostream>
-#include <set>
+#include <unordered_map>
 #include <string>
+#include <vector>
+#include <algorithm>
 
 int main() {
     std::ios::sync_with_stdio(false);
     std::cin.tie(nullptr);
     std::cout.tie(nullptr);
 
-    std::set<std::string> set = {};
+    std::unordered_map<std::string, int> map = {};
+    std::vector<std::string> vec;
 
-    int N;
-
-    std::cin >> N;
-
-    int result = 0;
+    int N, M;
+    std::cin >> N >> M;
 
     for (int i = 0; i < N; i++) {
-        std::string input_a, input_b;
+        std::string input;
+        std::cin >> input;
 
-        std::cin >> input_a >> input_b;
+        if (input.length() < M) continue;
 
-        if (set.find(input_a) != set.end() && set.find(input_b) != set.end()) {
-            continue;
-        } else if (set.find(input_a) != set.end() || set.find(input_b) != set.end()) {
-            result++;
-            set.insert(input_a);
-            set.insert(input_b);
-            continue;
-        } else if (input_a == "ChongChong" || input_b == "ChongChong") {
-            result++;
-            set.insert(input_a);
-            set.insert(input_b);
-            continue;
+        if (map.find(input) == map.end()) {
+            vec.push_back(input);
+            map[input] = 1;
+        } else {
+            map[input]++;
         }
     }
 
-    std::cout << result + 1 << '\n';
+
+    std::sort(vec.begin(), vec.end(), [&map](const std::string &a, const std::string &b) {
+        if (map.find(a)->second == map.find(b)->second) {
+            if (a.size() == b.size()) {
+                return a < b;
+            } else {
+                return a.size() > b.size();
+            }
+        } else {
+            return map.find(a)->second > map.find(b)->second;
+        }
+    });
+
+
+    for (auto it = vec.begin(); it != vec.end(); it++) {
+        std::cout << *it << '\n';
+    }
+
 
     return 0;
 }

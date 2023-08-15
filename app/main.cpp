@@ -3,33 +3,40 @@
 #include <string>
 
 int main() {
-  std::ios::sync_with_stdio(false);
-  std::cin.tie(nullptr);
-  std::cout.tie(nullptr);
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+    std::cout.tie(nullptr);
 
-  std::set<std::string> set = {};
+    std::set<std::string> set = {};
 
-  int N;
+    int N;
 
-  std::cin >> N;
+    std::cin >> N;
 
-  int result = 0;
+    int result = 0;
 
-  for (int i = 0; i < N; i++) {
-    std::string input;
+    for (int i = 0; i < N; i++) {
+        std::string input_a, input_b;
 
-    std::cin >> input;
+        std::cin >> input_a >> input_b;
 
-    if (input == "ENTER") {
-      set.clear();
-    } else if (set.find(input) == set.end()) {
-      result++;
-      set.insert(input);
+        if (set.find(input_a) != set.end() && set.find(input_b) != set.end()) {
+            continue;
+        } else if (set.find(input_a) != set.end() || set.find(input_b) != set.end()) {
+            result++;
+            set.insert(input_a);
+            set.insert(input_b);
+            continue;
+        } else if (input_a == "ChongChong" || input_b == "ChongChong") {
+            result++;
+            set.insert(input_a);
+            set.insert(input_b);
+            continue;
+        }
     }
-  }
 
-  std::cout << result << '\n';
+    std::cout << result + 1 << '\n';
 
-  return 0;
+    return 0;
 }
 

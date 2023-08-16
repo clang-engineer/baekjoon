@@ -1,47 +1,48 @@
-#include <deque>
 #include <iostream>
+#include <stack>
 #include <vector>
 
 int main() {
-  std::ios::sync_with_stdio(false);
-  std::cin.tie(nullptr);
-  std::cout.tie(nullptr);
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+    std::cout.tie(nullptr);
 
-  int N;
-  std::cin >> N;
+    int N;
+    std::cin >> N;
 
-  std::vector<int> structure(N);
+    std::vector<int> vec(N);
+    std::stack<int> stack;
 
-  for (int i = 0; i < N; ++i) {
-    std::cin >> structure[i];
-  }
-
-  std::deque<int> dq;
-
-  for (int i = 0; i < N; ++i) {
-    int num;
-    std::cin >> num;
-
-    if (structure[i] == 0) {
-      dq.push_front(num);
+    for (int i = 1; i <= N; ++i) {
+        std::cin >> vec[i - 1];
     }
-  }
 
-  int M;
-  std::cin >> M;
+    int current = 1;
 
-  for (int i = 0; i < M; ++i) {
-    int num;
-    std::cin >> num;
+    for (int i = 0; i < vec.size(); i++) {
+        if (vec[i] == current) {
+            current++;
+        } else {
+            while (!stack.empty() && stack.top() == current) {
+                stack.pop();
+                current++;
+            }
+            stack.push(vec[i]);
+        }
+    }
 
-    dq.push_back(num);
+    while (!stack.empty()) {
+        if (stack.top() == current) {
+            stack.pop();
+            current++;
+        } else {
+            std::cout << "Sad" << '\n';
+            return 0;
+        }
+    }
 
-    std::cout << dq.front() << ' ';
-    dq.pop_front();
-  }
+    std::cout << "Nice" << '\n';
 
-  std::cout << '\n';
-
-  return 0;
+    return 0;
 }
 

@@ -1,47 +1,51 @@
 #include <iostream>
-#include <stack>
 #include <vector>
+#include <algorithm>
 
 int main() {
     std::ios::sync_with_stdio(false);
     std::cin.tie(nullptr);
     std::cout.tie(nullptr);
 
-    int N;
+    int N, M;
     std::cin >> N;
 
-    std::vector<int> vec(N);
-    std::stack<int> stack;
+    std::vector<int> vec1(N);
 
-    for (int i = 1; i <= N; ++i) {
-        std::cin >> vec[i - 1];
+    for (int i = 0; i < N; ++i) {
+        std::cin >> vec1[i];
     }
 
-    int current = 1;
+    std::sort(vec1.begin(), vec1.end());
 
-    for (int i = 0; i < vec.size(); i++) {
-        if (vec[i] == current) {
-            current++;
-        } else {
-            while (!stack.empty() && stack.top() == current) {
-                stack.pop();
-                current++;
+    std::cin >> M;
+
+    std::vector<int> vec2(M);
+
+    for (int i = 0; i < M; ++i) {
+        std::cin >> vec2[i];
+    }
+
+    for (int i = 0; i < M; ++i) {
+        int left = 0;
+        int right = N - 1;
+        int mid = 0;
+        bool found = false;
+        while (left <= right) {
+            mid = (left + right) / 2;
+            if (vec1[mid] == vec2[i]) {
+                found = true;
+                break;
+            } else if (vec1[mid] < vec2[i]) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
             }
-            stack.push(vec[i]);
         }
+        std::cout << found << '\n';
     }
 
-    while (!stack.empty()) {
-        if (stack.top() == current) {
-            stack.pop();
-            current++;
-        } else {
-            std::cout << "Sad" << '\n';
-            return 0;
-        }
-    }
 
-    std::cout << "Nice" << '\n';
 
     return 0;
 }

@@ -1,4 +1,6 @@
 #include <iostream>
+
+namespace _15649 {
 #define MAX 9
 
 int N, M;
@@ -40,4 +42,4 @@ int main() {
 
   return 0;
 }
-
+} // namespace _15649

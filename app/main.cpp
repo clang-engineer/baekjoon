@@ -1,24 +1,43 @@
 #include <iostream>
-#include "_30402.h"
-#include <string>
+#include "_18352.h"
+#include <vector>
+#include <algorithm>
 
 int main() {
     std::ios::sync_with_stdio(false);
     std::cin.tie(nullptr);
     std::cout.tie(nullptr);
 
-    while (true) {
-        std::string input;
-        std::cin >> input;
+    long N, M, K, X;
 
-        std::string result = _30402::getCatName(input);
+    std::cin >> N >> M >> K >> X;
 
-        if (result == "what?") {
-            continue;
-        } else {
-            std::cout << result << std::endl;
-            break;
+    std::vector<std::pair<int, int>> edges(M);
+
+    for (int i = 0; i < M; i++) {
+        std::cin >> edges[i].first >> edges[i].second;
+    }
+
+
+    _18352::Solution solution(N, edges);
+
+    std::vector<int> result = solution.getBFSDistance(X);
+
+    std::vector<int> answer;
+
+    for (int i = 0; i < N; i++) {
+        if (result[i] == K) {
+            answer.push_back(i + 1);
         }
+    }
+
+    if (!answer.empty()) {
+        std::sort(answer.begin(), answer.end());
+        for (int i = 0; i < answer.size(); i++) {
+            std::cout << answer[i] << "\n";
+        }
+    } else if (answer.empty()) {
+        std::cout << -1 << "\n";
     }
 
     return 0;

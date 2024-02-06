@@ -1,64 +1,70 @@
 #include <iostream>
-#include <queue>
+#include <vector>
 
-void BFS();
+void DFS(int node);
 
-static int Sender[] = {0, 0, 1, 1, 2, 2};
-static int Receiver[] = {1, 2, 0, 2, 0, 1};
+static std::vector<std::vector<int>> A;
+static std::vector<int> check;
+static std::vector<int> visited;
+static bool IsEven;
 
-static bool visited[201][201];
-static bool answer[201];
-static int now[3];
-
-int main()
-{
+int main() {
     std::ios::sync_with_stdio(false);
     std::cin.tie(NULL);
     std::cout.tie(NULL);
 
-    std::cin >> now[0] >> now[1] >> now[2];
-    BFS();
+    int N;
+    std::cin >> N;
 
-    for (int i = 0; i <= now[2]; i++)
-    {
-        if (answer[i])
-        {
-            std::cout << i << ' ';
+    for (int t = 0; t < N; t++) {
+        int V, E;
+        std::cin >> V >> E;
+        A.resize(V + 1);
+        check.resize(V + 1);
+        visited.resize(V + 1);
+        IsEven = true;
+
+        for (int i = 0; i < E; i++) {
+            int S, E;
+            std::cin >> S >> E;
+            A[S].push_back(E);
+            A[E].push_back(S);
+        }
+
+        for (int i = 1; i <= V; i++) {
+            if (IsEven) {
+                DFS(i);
+            } else {
+                break;
+            }
+        }
+
+        if (IsEven) {
+            std::cout << "YES" << std::endl;
+        } else {
+            std::cout << "NO" << std::endl;
+        }
+
+        for (int i = 0; i <= V; i++) {
+            A[i].clear();
+            visited[i] = false;
+            check[i] = 0;
         }
     }
 }
 
-void BFS() {
-    std::queue<std::pair<int, int>> queue;
-    queue.push(std::make_pair(0, 0));
-    visited[0][0] = true;
-    answer[now[2]] = true;
+void DFS(int node) {
+    visited[node] = true;
 
-    while (!queue.empty()) {
-        std::pair<int, int> p = queue.front();
-        queue.pop();
-
-        int A = p.first;
-        int B = p.second;
-        int C = now[2] - A - B;
-
-        for (int i = 0; i < 6; i++) {
-            int next[3] = {A, B, C};
-            next[Receiver[i]] += next[Sender[i]];
-            next[Sender[i]] = 0;
-            if (next[Receiver[i]] > now[Receiver[i]]) {
-                next[Sender[i]] = next[Receiver[i]] - now[Receiver[i]];
-                next[Receiver[i]] = now[Receiver[i]];
-            }
-            if (!visited[next[0]][next[1]]) {
-                visited[next[0]][next[1]] = true;
-                queue.push({next[0], next[1]});
-                if (next[0] == 0) {
-                    answer[next[2]] = true;
-                }
+    for (int i: A[node]) {
+        if (!visited[i]) {
+            check[i] = (check[node] + 1) % 2;
+            DFS(i);
+        } else {
+            if (check[i] == check[node]) {
+                IsEven = false;
             }
         }
     }
-
 
 }

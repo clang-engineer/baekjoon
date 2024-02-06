@@ -1,29 +1,41 @@
 #include <iostream>
-#include "_1325.h"
+#include "_1707.h"
 
 int main() {
     std::ios::sync_with_stdio(false);
     std::cin.tie(nullptr);
     std::cout.tie(nullptr);
 
-    long N, M;
-    std::cin >> N >> M;
+    long N;
+    std::cin >> N;
 
-    _1325::N = N;
-    _1325::A.resize(N+1);
-    _1325::answer.resize(N+1);
-    _1325::visited.resize(N+1);
+    for (int t = 0; t < N; t++) {
+        long V, E;
+        std::cin >> V >> E;
 
-    for (int i = 0; i < M; i++) {
-        int s, e;
-        std::cin >> s >> e;
-        _1325::A[s].push_back(e);
-    }
+        _1707::V = V;
+        _1707::E = E;
 
-    std::vector<int> result = _1325::GetResult();
+        _1707::A.resize(V + 1);
+        _1707::visited.resize(V + 1);
+        _1707::check.resize(V + 1);
+        _1707::IsEven = true;
 
-    for (int i: result) {
-        std::cout << i << " ";
+        for (int i = 0; i < E; i++) {
+            int a, b;
+            std::cin >> a >> b;
+
+            _1707::A[a].push_back(b);
+            _1707::A[b].push_back(a);
+        }
+
+        std::cout << _1707::GetResult() << '\n';
+
+        for (int i = 0; i <= V; i++) {
+            _1707::A[i].clear();
+            _1707::visited[i] = false;
+            _1707::check[i] = 0;
+        }
     }
 
     return 0;

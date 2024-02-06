@@ -5,7 +5,8 @@ file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS
 
 # declare executable library
 add_library(custom_library STATIC ${SRC_FILES}
-        _1325.cpp)
+        _1325.cpp
+        _1707.cpp)
 
 # set include directories
 target_include_directories(custom_library PUBLIC ${CMAKE_SOURCE_DIR}/include)

@@ -1,43 +1,64 @@
 #include <iostream>
-#include "_1707.h"
+#include <queue>
 
-int main() {
+void BFS();
+
+static int Sender[] = {0, 0, 1, 1, 2, 2};
+static int Receiver[] = {1, 2, 0, 2, 0, 1};
+
+static bool visited[201][201];
+static bool answer[201];
+static int now[3];
+
+int main()
+{
     std::ios::sync_with_stdio(false);
-    std::cin.tie(nullptr);
-    std::cout.tie(nullptr);
+    std::cin.tie(NULL);
+    std::cout.tie(NULL);
 
-    long N;
-    std::cin >> N;
+    std::cin >> now[0] >> now[1] >> now[2];
+    BFS();
 
-    for (int t = 0; t < N; t++) {
-        long V, E;
-        std::cin >> V >> E;
-
-        _1707::V = V;
-        _1707::E = E;
-
-        _1707::A.resize(V + 1);
-        _1707::visited.resize(V + 1);
-        _1707::check.resize(V + 1);
-        _1707::IsEven = true;
-
-        for (int i = 0; i < E; i++) {
-            int a, b;
-            std::cin >> a >> b;
-
-            _1707::A[a].push_back(b);
-            _1707::A[b].push_back(a);
+    for (int i = 0; i <= now[2]; i++)
+    {
+        if (answer[i])
+        {
+            std::cout << i << ' ';
         }
+    }
+}
 
-        std::cout << _1707::GetResult() << '\n';
+void BFS() {
+    std::queue<std::pair<int, int>> queue;
+    queue.push(std::make_pair(0, 0));
+    visited[0][0] = true;
+    answer[now[2]] = true;
 
-        for (int i = 0; i <= V; i++) {
-            _1707::A[i].clear();
-            _1707::visited[i] = false;
-            _1707::check[i] = 0;
+    while (!queue.empty()) {
+        std::pair<int, int> p = queue.front();
+        queue.pop();
+
+        int A = p.first;
+        int B = p.second;
+        int C = now[2] - A - B;
+
+        for (int i = 0; i < 6; i++) {
+            int next[3] = {A, B, C};
+            next[Receiver[i]] += next[Sender[i]];
+            next[Sender[i]] = 0;
+            if (next[Receiver[i]] > now[Receiver[i]]) {
+                next[Sender[i]] = next[Receiver[i]] - now[Receiver[i]];
+                next[Receiver[i]] = now[Receiver[i]];
+            }
+            if (!visited[next[0]][next[1]]) {
+                visited[next[0]][next[1]] = true;
+                queue.push({next[0], next[1]});
+                if (next[0] == 0) {
+                    answer[next[2]] = true;
+                }
+            }
         }
     }
 
-    return 0;
-}
 
+}

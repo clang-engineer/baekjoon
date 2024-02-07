@@ -1,70 +1,67 @@
 #include <iostream>
 #include <vector>
 
-void DFS(int node);
+static std::vector<int> parent;
 
-static std::vector<std::vector<int>> A;
-static std::vector<int> check;
-static std::vector<int> visited;
-static bool IsEven;
+void unionfunc(int a, int b);
+
+int find(int a);
+
+bool checkSame(int a, int b);
 
 int main() {
     std::ios::sync_with_stdio(false);
     std::cin.tie(NULL);
     std::cout.tie(NULL);
 
-    int N;
-    std::cin >> N;
+    int N, M;
+    std::cin >> N >> M;
+    parent.resize(N + 1);
 
-    for (int t = 0; t < N; t++) {
-        int V, E;
-        std::cin >> V >> E;
-        A.resize(V + 1);
-        check.resize(V + 1);
-        visited.resize(V + 1);
-        IsEven = true;
+    for (int i = 0; i <= N; i++) {
+        parent[i] = i;
+    }
 
-        for (int i = 0; i < E; i++) {
-            int S, E;
-            std::cin >> S >> E;
-            A[S].push_back(E);
-            A[E].push_back(S);
-        }
+    for (int i = 0; i < M; i++) {
+        int question, a, b;
+        std::cin >> question >> a >> b;
 
-        for (int i = 1; i <= V; i++) {
-            if (IsEven) {
-                DFS(i);
-            } else {
-                break;
-            }
-        }
-
-        if (IsEven) {
-            std::cout << "YES" << std::endl;
+        if (question == 0) {
+            unionfunc(a, b);
         } else {
-            std::cout << "NO" << std::endl;
-        }
-
-        for (int i = 0; i <= V; i++) {
-            A[i].clear();
-            visited[i] = false;
-            check[i] = 0;
+            if (checkSame(a, b)) {
+                std::cout << "YES" << '\n';
+            } else {
+                std::cout << "NO" << '\n';
+            }
         }
     }
 }
 
-void DFS(int node) {
-    visited[node] = true;
+void unionfunc(int a, int b) {
+    a = find(a);
+    b = find(b);
 
-    for (int i: A[node]) {
-        if (!visited[i]) {
-            check[i] = (check[node] + 1) % 2;
-            DFS(i);
-        } else {
-            if (check[i] == check[node]) {
-                IsEven = false;
-            }
-        }
+    if (a != b) {
+        parent[b] = a;
+    }
+}
+
+int find(int a) {
+    if (a == parent[a]) {
+        return a;
     }
 
+    return parent[a] = find(parent[a]);
+}
+
+bool checkSame(int a, int b) {
+    a = find(a);
+    b = find(b);
+
+    if (a == b) {
+        return true;
+    }
+
+    return false;
 }

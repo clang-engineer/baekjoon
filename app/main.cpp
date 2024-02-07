@@ -1,14 +1,7 @@
 #include <iostream>
 #include <vector>
 
-static std::vector<int> parent;
-static std::vector<int> trueP;
-static std::vector<std::vector<int>> party;
-static int result;
-
-void unionfunc(int a, int b);
-
-int find(int a);
+#include "_1043.h"
 
 int main() {
     std::ios::sync_with_stdio(false);
@@ -17,13 +10,17 @@ int main() {
 
     int N, M, T;
     std::cin >> N >> M >> T;
-    trueP.resize(T);
+
+    // init true parent
+    _1043::trueP.resize(T);
 
     for (int i = 0; i < T; i++) {
-        std::cin >> trueP[i];
+        std::cin >> _1043::trueP[i];
     }
 
-    party.resize(M);
+
+    // init party member
+    _1043::party.resize(M);
 
     for (int i = 0; i < M; i++) {
         int party_size;
@@ -32,55 +29,46 @@ int main() {
         for (int j = 0; j < party_size; j++) {
             int temp;
             std::cin >> temp;
-            party[i].push_back(temp);
+            _1043::party[i].push_back(temp);
         }
     }
 
-    parent.resize(N + 1);
+
+    // init origin parent
+    _1043::parent.resize(N + 1);
 
     for (int i = 0; i <= N; i++) {
-        parent[i] = i;
+        _1043::parent[i] = i;
     }
 
+
+    // union party
     for (int i = 0; i < M; i++) {
-        int firstPeople = party[i][0];
-        for (int j = 1; j < party[i].size(); j++) {
-            unionfunc(firstPeople, party[i][j]);
+        int firstPeople = _1043::party[i][0];
+        for (int j = 1; j < _1043::party[i].size(); j++) {
+            _1043::unionfunc(firstPeople, _1043::party[i][j]);
         }
     }
 
+
+    // check is possible
     for (int i = 0; i < M; i++) {
         bool isPossible = true;
-        int cur = party[i][0];
+        int cur = _1043::party[i][0];
 
         for (int j = 0; j < T; j++) {
-            if (find(cur) == find(trueP[j])) {
+            if (_1043::find(cur) == _1043::find(_1043::trueP[j])) {
                 isPossible = false;
                 break;
             }
         }
 
         if (isPossible) {
-            result++;
+            _1043::result++;
         }
     }
 
-    std::cout << result;
+    std::cout << _1043::result;
 }
 
 
-void unionfunc(int a, int b) {
-    a = find(a);
-    b = find(b);
-
-    if (a != b) {
-        parent[b] = a;
-    }
-}
-
-int find(int a) {
-    if (parent[a] == a) {
-        return a;
-    }
-    return parent[a] = find(parent[a]);
-}

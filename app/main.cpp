@@ -1,13 +1,7 @@
 #include <iostream>
 #include <vector>
 
-static std::vector<int> parent;
-
-void unionfunc(int a, int b);
-
-int find(int a);
-
-bool checkSame(int a, int b);
+#include "_1717.h"
 
 int main() {
     std::ios::sync_with_stdio(false);
@@ -16,10 +10,10 @@ int main() {
 
     int N, M;
     std::cin >> N >> M;
-    parent.resize(N + 1);
+    _1717::parent.resize(N + 1);
 
     for (int i = 0; i <= N; i++) {
-        parent[i] = i;
+        _1717::parent[i] = i;
     }
 
     for (int i = 0; i < M; i++) {
@@ -27,9 +21,9 @@ int main() {
         std::cin >> question >> a >> b;
 
         if (question == 0) {
-            unionfunc(a, b);
+            _1717::unionfunc(a, b);
         } else {
-            if (checkSame(a, b)) {
+            if (_1717::checkSame(a, b)) {
                 std::cout << "YES" << '\n';
             } else {
                 std::cout << "NO" << '\n';
@@ -38,30 +32,3 @@ int main() {
     }
 }
 
-void unionfunc(int a, int b) {
-    a = find(a);
-    b = find(b);
-
-    if (a != b) {
-        parent[b] = a;
-    }
-}
-
-int find(int a) {
-    if (a == parent[a]) {
-        return a;
-    }
-
-    return parent[a] = find(parent[a]);
-}
-
-bool checkSame(int a, int b) {
-    a = find(a);
-    b = find(b);
-
-    if (a == b) {
-        return true;
-    }
-
-    return false;
-}

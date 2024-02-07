@@ -4,9 +4,7 @@ file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS
   )
 
 # define the executable
-add_executable(${PROJECT_NAME} ${SRC_FILES}
-        ../include/_1325.h
-        ../include/_1707.h)
+add_executable(${PROJECT_NAME} ${SRC_FILES})
 
 
 target_link_libraries(${PROJECT_NAME} PUBLIC custom_library)

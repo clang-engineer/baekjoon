@@ -1,33 +1,59 @@
 #include <iostream>
 #include <vector>
-#include "_2252.h"
+#include <queue>
 
 int main() {
     std::ios::sync_with_stdio(false);
-    std::cin.tie(0);
-    std::cout.tie(0);
+    std::cin.tie(nullptr);
+    std::cout.tie(nullptr);
 
-    typedef std::vector<int> vi;
-    int N, M;
-    std::cin >> N >> M;
+    int N;
+    std::cin >> N;
+    std::vector<std::vector<int>> list(N + 1);
+    std::vector<int> indegree(N + 1);
+    std::vector<int> self_build(N + 1);
 
-    std::vector<vi> A;
-    vi indegree;
+    for (int i = 1; i <= N; i++) {
+        std::cin >> self_build[i];
 
-    A.resize(N + 1);
-    indegree.resize(N + 1);
+        while (true) {
+            int pre_temp;
+            std::cin >> pre_temp;
 
-    for (int i = 0; i < M; i++) {
-        int S, E;
-        std::cin >> S >> E;
-        A[S].push_back(E);
-        indegree[E]++;
+            if (pre_temp == -1) {
+                break;
+            }
+
+            list[pre_temp].push_back(i);
+            indegree[i]++;
+        }
     }
 
-    std::vector<int> result = _2252::GetTopologySort(A, indegree);
+    std::queue<int> queue;
 
-    for (int i = 0; i < result.size(); i++) {
-        std::cout << result[i] << " ";
+    for (int i = 1; i <= N; i++) {
+        if (indegree[i] == 0) {
+            queue.push(i);
+        }
     }
+
+    std::vector<int> result(N + 1);
+
+    while (!queue.empty()) {
+        int now = queue.front();
+        queue.pop();
+
+        for (int next: list[now]) {
+            indegree[next]--;
+            result[next] = std::max(result[next], result[now] + self_build[now]);
+            if (indegree[next] == 0) {
+                queue.push(next);
+            }
+        }
+    }
+
+    for (int i = 1; i <= N; i++) {
+        std::cout << result[i] + self_build[i] << "\n";
+    }
+
 }
-

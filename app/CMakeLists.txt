@@ -4,7 +4,8 @@ file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS
   )
 
 # define the executable
-add_executable(${PROJECT_NAME} ${SRC_FILES})
+add_executable(${PROJECT_NAME} ${SRC_FILES}
+        ../include/_2252.h)
 
 
 target_link_libraries(${PROJECT_NAME} PUBLIC custom_library)

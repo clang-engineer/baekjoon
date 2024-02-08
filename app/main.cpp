@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <queue>
+#include "_2252.h"
 
 int main() {
     std::ios::sync_with_stdio(false);
@@ -24,26 +24,10 @@ int main() {
         indegree[E]++;
     }
 
-    std::queue<int> queue;
+    std::vector<int> result = _2252::GetTopologySort(A, indegree);
 
-    for (int i = 1; i <= N; i++) {
-        if (indegree[i] == 0) {
-            queue.push(i);
-        }
+    for (int i = 0; i < result.size(); i++) {
+        std::cout << result[i] << " ";
     }
-
-    while (!queue.empty()) {
-        int front = queue.front();
-        queue.pop();
-        std::cout << front << " ";
-        for (int i = 0; i < A[front].size(); i++) {
-            int next = A[front][i];
-            indegree[next]--;
-            if (indegree[next] == 0) {
-                queue.push(next);
-            }
-        }
-    }
-
-
 }
+

@@ -1,59 +1,66 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <limits.h>
+
+typedef std::pair<int, int> edge;
+static int V, E, K;
+static std::vector<int> distance;
+static std::vector<bool> visited;
+static std::vector<std::vector<edge>> graph;
+
+static std::priority_queue<edge, std::vector<edge>, std::greater<edge>> pq;
 
 int main() {
     std::ios::sync_with_stdio(false);
-    std::cin.tie(nullptr);
-    std::cout.tie(nullptr);
+    std::cin.tie(NULL);
+    std::cout.tie(NULL);
 
-    int N;
-    std::cin >> N;
-    std::vector<std::vector<int>> list(N + 1);
-    std::vector<int> indegree(N + 1);
-    std::vector<int> self_build(N + 1);
+    std::cin >> V >> E >> K;
 
-    for (int i = 1; i <= N; i++) {
-        std::cin >> self_build[i];
+    distance.resize(V + 1);
+    std::fill(distance.begin(), distance.end(), INT_MAX);
 
-        while (true) {
-            int pre_temp;
-            std::cin >> pre_temp;
+    visited.resize(V + 1);
+    std::fill(visited.begin(), visited.end(), false);
 
-            if (pre_temp == -1) {
-                break;
-            }
+    graph.resize(V + 1);
 
-            list[pre_temp].push_back(i);
-            indegree[i]++;
-        }
+    for (int i = 0; i < E; i++) {
+        int u, v, w;
+        std::cin >> u >> v >> w;
+        graph[u].push_back({v, w});
     }
 
-    std::queue<int> queue;
+    pq.push(std::make_pair(0, K));
+    distance[K] = 0;
 
-    for (int i = 1; i <= N; i++) {
-        if (indegree[i] == 0) {
-            queue.push(i);
-        }
-    }
+    while (!pq.empty()) {
+        edge current = pq.top();
+        pq.pop();
 
-    std::vector<int> result(N + 1);
+        int current_node = current.second;
+        if (visited[current_node]) continue;
 
-    while (!queue.empty()) {
-        int now = queue.front();
-        queue.pop();
+        visited[current_node] = true;
 
-        for (int next: list[now]) {
-            indegree[next]--;
-            result[next] = std::max(result[next], result[now] + self_build[now]);
-            if (indegree[next] == 0) {
-                queue.push(next);
+        for (auto &next: graph[current_node]) {
+            int next_node = next.first;
+            int next_weight = next.second;
+
+            if (distance[next_node] > distance[current_node] + next_weight) {
+                distance[next_node] = distance[current_node] + next_weight;
+                pq.push(std::make_pair(distance[next_node], next_node));
             }
         }
     }
 
-    for (int i = 1; i <= N; i++) {
-        std::cout << result[i] + self_build[i] << "\n";
+    for (int i = 1; i <= V; i++) {
+        if (distance[i] == INT_MAX) {
+            std::cout << "INF\n";
+        } else {
+            std::cout << distance[i] << "\n";
+        }
     }
 
 }

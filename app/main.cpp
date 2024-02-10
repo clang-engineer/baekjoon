@@ -1,37 +1,60 @@
 #include <iostream>
 #include <vector>
+#include <queue>
 #include <limits.h>
 
-#include "_1753.h"
+typedef std::pair<int, int> edge;
+
+int dijkstra(int start, int end, int node_count, std::vector<std::vector<edge>> &graph);
 
 int main() {
     std::ios::sync_with_stdio(false);
-    std::cin.tie(NULL);
-    std::cout.tie(NULL);
+    std::cin.tie(0);
+    std::cout.tie(0);
 
-    int node_count, edge_count, start_node;
+    int node_count, edge_count;
+    std::cin >> node_count >> edge_count;
 
-    std::vector<std::vector<_1753::edge>> graph;
-
-    std::cin >> node_count >> edge_count >> start_node;
-
-    graph.resize(node_count + 1);
+    std::vector<std::vector<edge>> graph(node_count + 1);
+    std::priority_queue<edge, std::vector<edge>, std::greater<edge>> pq;
 
     for (int i = 0; i < edge_count; i++) {
-        int u, v, w;
-        std::cin >> u >> v >> w;
-        graph[u].push_back({v, w});
+        int from, to, weight;
+        std::cin >> from >> to >> weight;
+        graph[from].push_back({to, weight});
     }
 
-    std::vector<int> result = _1753::GetDijkstraDistance(node_count, start_node, graph);
+    int start_node, end_node;
+    std::cin >> start_node >> end_node;
+    int result = dijkstra(start_node, end_node,
+                          node_count, graph);
+    std::cout << result << '\n';
+}
 
-    for (int i = 1; i <= node_count; i++) {
-        if (result[i] == INT_MAX) {
-            std::cout << "INF\n";
-        } else {
-            std::cout << result[i] << "\n";
+int dijkstra(int start, int end, int node_count, std::vector<std::vector<edge>> &graph) {
+    std::vector<int> distance = std::vector<int>(node_count + 1, INT_MAX);
+    std::vector<bool> visited = std::vector<bool>(node_count + 1, false);
+
+    std::priority_queue<edge, std::vector<edge>, std::greater<edge>> pq;
+
+    pq.push({0, start});
+    distance[start] = 0;
+
+    while (!pq.empty()) {
+        edge current = pq.top();
+        pq.pop();
+        int current_node = current.second;
+
+        if (!visited[current_node]) {
+            visited[current_node] = true;
+            for (edge n: graph[current_node]) {
+                if (!visited[n.first] && distance[n.first] > distance[current_node] + n.second) {
+                    distance[n.first] = distance[current_node] + n.second;
+                    pq.push({distance[n.first], n.first});
+                }
+            }
         }
     }
 
+    return distance[end];
 }
-

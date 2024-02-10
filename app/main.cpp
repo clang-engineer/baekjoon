@@ -5,32 +5,30 @@
 
 typedef std::pair<int, int> edge;
 
-static int V, E;
-
-std::vector<int> GetDijkstraDistance(int start, std::vector<std::vector<edge>> &graph);
+std::vector<int> GetDijkstraDistance(int node_count, int start, std::vector<std::vector<edge>> &graph);
 
 int main() {
     std::ios::sync_with_stdio(false);
     std::cin.tie(NULL);
     std::cout.tie(NULL);
 
-    int K;
+    int node_count, edge_count, start_node;
 
     std::vector<std::vector<edge>> graph;
 
-    std::cin >> V >> E >> K;
+    std::cin >> node_count >> edge_count >> start_node;
 
-    graph.resize(V + 1);
+    graph.resize(node_count + 1);
 
-    for (int i = 0; i < E; i++) {
+    for (int i = 0; i < edge_count; i++) {
         int u, v, w;
         std::cin >> u >> v >> w;
         graph[u].push_back({v, w});
     }
 
-    std::vector<int> result = GetDijkstraDistance(K, graph);
+    std::vector<int> result = GetDijkstraDistance(node_count, start_node, graph);
 
-    for (int i = 1; i <= V; i++) {
+    for (int i = 1; i <= node_count; i++) {
         if (result[i] == INT_MAX) {
             std::cout << "INF\n";
         } else {
@@ -40,15 +38,18 @@ int main() {
 
 }
 
-std::vector<int> GetDijkstraDistance(int start_node, std::vector<std::vector<edge>> &graph) {
+std::vector<int> GetDijkstraDistance(
+        int node_count,
+        int start_node,
+        std::vector<std::vector<edge>> &graph) {
     std::priority_queue<edge, std::vector<edge>, std::greater<edge>> pq;
 
     std::vector<int> distance;
-    distance.resize(V + 1);
+    distance.resize(node_count + 1);
     std::fill(distance.begin(), distance.end(), INT_MAX);
 
     std::vector<bool> visited;
-    visited.resize(V + 1);
+    visited.resize(node_count + 1);
     std::fill(visited.begin(), visited.end(), false);
 
     pq.push(std::make_pair(0, start_node));

@@ -1,36 +1,42 @@
 #include <iostream>
 #include <vector>
-#include <tuple>
 #include <limits.h>
+#include <tuple>
 
-#include "_11657.h"
+#include "_1219.h"
 
-using namespace _11657;
+using namespace _1219;
 
 int main() {
     std::ios::sync_with_stdio(false);
     std::cin.tie(NULL);
     std::cout.tie(NULL);
 
-    int node_count, edge_count;
-    std::cin >> node_count >> edge_count;
+    int node_count, start_node, end_node, edge_count;
+    std::cin >> node_count >> start_node >> end_node >> edge_count;
 
-    std::vector<edge> edges = StdCinEdges(edge_count);
+    std::vector<edge> edges;
+    for (int i = 0; i < edge_count; i++) {
+        int from, to, price;
+        std::cin >> from >> to >> price;
+        edges.push_back({from, to, price});
+    }
 
-    std::vector<long> distances = GetDistances(node_count, edges);
+    std::vector<long> city_money;
+    for (int i = 0; i < node_count; i++) {
+        long money;
+        std::cin >> money;
+        city_money.push_back(money);
+    }
 
-    bool has_negative_cycle = HasNegativeCircle(distances, edges);
+    std::vector<long> distances = GetDistances(edges, city_money, node_count, start_node);
 
-    if (has_negative_cycle) {
-        std::cout << -1 << std::endl;
+    if (distances[end_node] == LONG_MAX) {
+        std::cout << "Gee";
+    } else if (distances[end_node] == LONG_MIN) {
+        std::cout << "gg";
     } else {
-        for (int i = 2; i <= node_count; i++) {
-            if (distances[i] == LONG_MAX) {
-                std::cout << -1 << std::endl;
-            } else {
-                std::cout << distances[i] << std::endl;
-            }
-        }
+        std::cout << distances[end_node];
     }
 }
 

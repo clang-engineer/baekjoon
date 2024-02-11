@@ -13,5 +13,6 @@ file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS
 
 add_executable(${PROJECT_NAME}_test ${SRC_FILES}
         _2252.cpp
-        _1753.cpp)
+        _1753.cpp
+        _1916.cpp)
 target_link_libraries(${PROJECT_NAME}_test PRIVATE custom_library gtest gmock gtest_main)

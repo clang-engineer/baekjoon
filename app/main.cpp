@@ -1,42 +1,53 @@
 #include <iostream>
 #include <vector>
-#include <limits.h>
-#include <tuple>
-
-#include "_1219.h"
-
-using namespace _1219;
 
 int main() {
     std::ios::sync_with_stdio(false);
     std::cin.tie(NULL);
     std::cout.tie(NULL);
 
-    int node_count, start_node, end_node, edge_count;
-    std::cin >> node_count >> start_node >> end_node >> edge_count;
+    int N, M;
+    std::cin >> N >> M;
 
-    std::vector<edge> edges;
-    for (int i = 0; i < edge_count; i++) {
-        int from, to, price;
-        std::cin >> from >> to >> price;
-        edges.push_back({from, to, price});
+    long distance[N + 1][N + 1];
+
+    for (int i = 1; i <= N; i++) {
+        for (int j = 1; j <= N; j++) {
+            if (i == j)
+                distance[i][j] = 0;
+            else
+                distance[i][j] = 1e9;
+        }
     }
 
-    std::vector<long> city_money;
-    for (int i = 0; i < node_count; i++) {
-        long money;
-        std::cin >> money;
-        city_money.push_back(money);
+    for (int i = 0; i < M; i++) {
+        int start, end, weight;
+        std::cin >> start >> end >> weight;
+        if (distance[start][end] > weight) {
+            distance[start][end] = weight;
+        }
     }
 
-    std::vector<long> distances = GetDistances(edges, city_money, node_count, start_node);
-
-    if (distances[end_node] == LONG_MAX) {
-        std::cout << "Gee";
-    } else if (distances[end_node] == LONG_MIN) {
-        std::cout << "gg";
-    } else {
-        std::cout << distances[end_node];
+    for (int k = 1; k <= N; k++) {
+        for (int i = 1; i <= N; i++) {
+            for (int j = 1; j <= N; j++) {
+                if (distance[i][j] > distance[i][k] + distance[k][j]) {
+                    distance[i][j] = distance[i][k] + distance[k][j];
+                }
+            }
+        }
     }
+
+    for (int i = 1; i <= N; i++) {
+        for (int j = 1; j <= N; j++) {
+            if (distance[i][j] == 1e9) {
+                std::cout << "0 ";
+            } else {
+                std::cout << distance[i][j] << " ";
+            }
+        }
+        std::cout << "\n";
+    }
+
+    return 0;
 }
-

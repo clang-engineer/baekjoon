@@ -1,17 +1,9 @@
 #include <iostream>
 #include <queue>
 
-typedef struct Edge {
-    int src, dest, weight;
+#include "_1197.h"
 
-    bool operator>(const Edge &e) const {
-        return weight > e.weight;
-    }
-} Edge;
-
-int find_parent(std::vector<int> &parent, int node);
-
-void munion(std::vector<int> &parent, int a, int b);
+using namespace _1197;
 
 int main() {
     std::ios::sync_with_stdio(false);
@@ -49,22 +41,6 @@ int main() {
 
     std::cout << total_weight << '\n';
 
-
     return 0;
 }
 
-int find_parent(std::vector<int> &parent, int node) {
-    if (parent[node] == node) {
-        return node;
-    }
-    return parent[node] = find_parent(parent, parent[node]);
-}
-
-void munion(std::vector<int> &parent, int a, int b) {
-    a = find_parent(parent, a);
-    b = find_parent(parent, b);
-
-    if (a != b) {
-        parent[b] = a;
-    }
-}

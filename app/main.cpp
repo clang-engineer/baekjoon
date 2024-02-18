@@ -1,58 +1,70 @@
 #include <iostream>
-#include <limits.h>
+#include <queue>
+
+typedef struct Edge {
+    int src, dest, weight;
+
+    bool operator>(const Edge &e) const {
+        return weight > e.weight;
+    }
+} Edge;
+
+int find_parent(std::vector<int> &parent, int node);
+
+void munion(std::vector<int> &parent, int a, int b);
 
 int main() {
     std::ios::sync_with_stdio(false);
-    std::cin.tie(NULL);
-    std::cout.tie(NULL);
+    std::cin.tie(0);
+    std::cout.tie(0);
 
-    int node_num, edge_num;
-    long distances[101][101];
+    int node_count, edge_count;
+    std::cin >> node_count >> edge_count;
 
-    std::cin >> node_num >> edge_num;
+    std::vector<int> parent(node_count + 1);
+    for (int i = 0; i <= node_count; i++) {
+        parent[i] = i;
+    }
 
-    for (int i = 1; i <= node_num; i++) {
-        for (int j = 1; j <= node_num; j++) {
-            if (i == j) {
-                distances[i][j] = 0;
-            } else {
-                distances[i][j] = 10000001;
-            }
+    std::priority_queue<Edge, std::vector<Edge>, std::greater<Edge>> pq;
+    for (int i = 0; i < edge_count; i++) {
+        int src, dest, weight;
+        std::cin >> src >> dest >> weight;
+        pq.push({src, dest, weight});
+    }
+
+    int use_edge_count = 0;
+    int total_weight = 0;
+
+    while (use_edge_count < node_count - 1) {
+        Edge e = pq.top();
+        pq.pop();
+
+        if (find_parent(parent, e.src) != find_parent(parent, e.dest)) {
+            munion(parent, e.src, e.dest);
+            total_weight += e.weight;
+            use_edge_count++;
         }
     }
 
-    for (int i = 0; i < edge_num; i++) {
-        int start, end;
-        std::cin >> start >> end;
-        distances[start][end] = 1;
-        distances[end][start] = 1;
-    }
+    std::cout << total_weight << '\n';
 
-    for (int k = 1; k <= node_num; k++) {
-        for (int i = 1; i <= node_num; i++) {
-            for (int j = 1; j <= node_num; j++) {
-                if (distances[i][j] > distances[i][k] + distances[k][j]) {
-                    distances[i][j] = distances[i][k] + distances[k][j];
-                }
-            }
-        }
-    }
-
-    int Min = INT_MAX;
-    int Answer = -1;
-
-    for (int i = 1; i <= node_num; i++) {
-        int sum = 0;
-        for (int j = 1; j <= node_num; j++) {
-            sum += distances[i][j];
-        }
-        if (Min > sum) {
-            Min = sum;
-            Answer = i;
-        }
-    }
-
-    std::cout << Answer << std::endl;
 
     return 0;
+}
+
+int find_parent(std::vector<int> &parent, int node) {
+    if (parent[node] == node) {
+        return node;
+    }
+    return parent[node] = find_parent(parent, parent[node]);
+}
+
+void munion(std::vector<int> &parent, int a, int b) {
+    a = find_parent(parent, a);
+    b = find_parent(parent, b);
+
+    if (a != b) {
+        parent[b] = a;
+    }
 }

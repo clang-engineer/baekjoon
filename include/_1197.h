@@ -14,9 +14,11 @@ namespace _1197 {
         }
     } Edge;
 
-    int find_parent(std::vector<int> &parent, int node);
+    int FindParent(std::vector<int> &parent, int node);
 
-    void munion(std::vector<int> &parent, int a, int b);
+    void Union(std::vector<int> &parent, int a, int b);
+
+    int GetMSTWeight(int node_count, std::vector<Edge> &edges);
 }
 
 #endif //BAEKJOON__1197_H

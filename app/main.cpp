@@ -1,30 +1,42 @@
 #include <iostream>
-#include <queue>
+#include <vector>
 
-#include "_1197.h"
-
-using namespace _1197;
-
+void DFS(int node, std::vector<int>& answer, std::vector<bool>& visited, std::vector<std::vector<int>>& tree);
 
 int main() {
     std::ios::sync_with_stdio(false);
-    std::cin.tie(0);
-    std::cout.tie(0);
+    std::cin.tie(nullptr);
+    std::cout.tie(nullptr);
 
-    int node_count, edge_count;
-    std::cin >> node_count >> edge_count;
+    int N;
+    std::cin >> N;
 
-    std::vector<Edge> edges;
-    for (int i = 0; i < edge_count; i++) {
-        int src, dest, weight;
-        std::cin >> src >> dest >> weight;
-        edges.push_back({src, dest, weight});
+    std::vector<int> answer(N + 1, 0);
+    std::vector<bool> visited(N + 1, false);
+    std::vector<std::vector<int>> tree(N + 1, std::vector<int>());
+
+    for (int i = 0; i < N - 1; i++) {
+        int a, b;
+        std::cin >> a >> b;
+        tree[a].push_back(b);
+        tree[b].push_back(a);
     }
 
-    int mst_total_weight = GetMSTWeight(node_count, edges);
+    DFS(1, answer, visited, tree);
 
-    std::cout << mst_total_weight << '\n';
+    for (int i = 2; i <= N; i++) {
+        std::cout << answer[i] << '\n';
+    }
 
-    return 0;
 }
 
+void DFS(int node, std::vector<int>& answer, std::vector<bool>& visited, std::vector<std::vector<int>>& tree) {
+    visited[node] = true;
+    for (int i = 0; i < tree[node].size(); i++) {
+        int next = tree[node][i];
+        if (!visited[next]) {
+            answer[next] = node;
+            DFS(next, answer, visited, tree);
+        }
+    }
+}

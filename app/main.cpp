@@ -1,42 +1,59 @@
 #include <iostream>
 #include <vector>
 
-void DFS(int node, std::vector<int>& answer, std::vector<bool>& visited, std::vector<std::vector<int>>& tree);
+static int N;
+static std::vector<std::vector<int>> tree;
+static int answer = 0;
+static int delete_node = 0;
+static std::vector<bool> visited;
+
+void DFS(int number);
 
 int main() {
     std::ios::sync_with_stdio(false);
-    std::cin.tie(nullptr);
-    std::cout.tie(nullptr);
+    std::cin.tie(NULL);
+    std::cout.tie(NULL);
 
-    int N;
     std::cin >> N;
+    visited.resize(N);
+    tree.resize(N);
+    int root = 0;
 
-    std::vector<int> answer(N + 1, 0);
-    std::vector<bool> visited(N + 1, false);
-    std::vector<std::vector<int>> tree(N + 1, std::vector<int>());
-
-    for (int i = 0; i < N - 1; i++) {
-        int a, b;
-        std::cin >> a >> b;
-        tree[a].push_back(b);
-        tree[b].push_back(a);
+    for (int i = 0; i < N; i++) {
+        int parent;
+        std::cin >> parent;
+        if (parent == -1) {
+            root = i;
+        } else {
+            tree[i].push_back(parent);
+            tree[parent].push_back(i);
+        }
     }
 
-    DFS(1, answer, visited, tree);
+    int delete_node;
+    std::cin >> delete_node;
 
-    for (int i = 2; i <= N; i++) {
-        std::cout << answer[i] << '\n';
+    if (delete_node == root) {
+        std::cout << 0 << std::endl;
+    } else {
+        DFS(root);
+        std::cout << answer << std::endl;
     }
 
 }
 
-void DFS(int node, std::vector<int>& answer, std::vector<bool>& visited, std::vector<std::vector<int>>& tree) {
-    visited[node] = true;
-    for (int i = 0; i < tree[node].size(); i++) {
-        int next = tree[node][i];
-        if (!visited[next]) {
-            answer[next] = node;
-            DFS(next, answer, visited, tree);
+void DFS(int number) {
+    visited[number] = true;
+    int node_count = 0;
+
+    for (int i: tree[number]) {
+        if (!visited[i] && i != delete_node) {
+            node_count++;
+            DFS(i);
         }
+    }
+
+    if (node_count == 0) {
+        answer++;
     }
 }

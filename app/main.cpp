@@ -1,13 +1,9 @@
 #include <iostream>
 #include <vector>
 
-static int N;
-static std::vector<std::vector<int>> tree;
-static int answer = 0;
-static int delete_node = 0;
-static std::vector<bool> visited;
+#include "_1068.h"
 
-void DFS(int number);
+using namespace _1068;
 
 int main() {
     std::ios::sync_with_stdio(false);
@@ -38,20 +34,6 @@ int main() {
         DFS(root);
         std::cout << answer << "\n";
     }
-}
 
-void DFS(int number) {
-    visited[number] = true;
-    int node_count = 0;
-
-    for (int i :  tree[number]) {
-        if (!visited[i] && i != delete_node) {
-            node_count++;
-            DFS(i);
-        }
-    }
-
-    if (node_count == 0) {
-        answer++;
-    }
+    return 0;
 }

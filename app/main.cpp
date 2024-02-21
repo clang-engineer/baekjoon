@@ -22,31 +22,29 @@ int main() {
     for (int i = 0; i < N; i++) {
         int parent;
         std::cin >> parent;
-        if (parent == -1) {
-            root = i;
-        } else {
-            tree[i].push_back(parent);
+
+        if (parent != -1) {
             tree[parent].push_back(i);
+        } else {
+            root = i;
         }
     }
 
-    int delete_node;
     std::cin >> delete_node;
 
     if (delete_node == root) {
-        std::cout << 0 << std::endl;
+        std::cout << 0 << "\n";
     } else {
         DFS(root);
-        std::cout << answer << std::endl;
+        std::cout << answer << "\n";
     }
-
 }
 
 void DFS(int number) {
     visited[number] = true;
     int node_count = 0;
 
-    for (int i: tree[number]) {
+    for (int i :  tree[number]) {
         if (!visited[i] && i != delete_node) {
             node_count++;
             DFS(i);

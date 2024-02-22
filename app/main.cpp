@@ -1,39 +1,76 @@
 #include <iostream>
-#include <vector>
 
-#include "_1068.h"
+class Node {
+public:
+    Node *next[26];
+    bool isEnd;
 
-using namespace _1068;
+    Node() : isEnd(false) {
+        std::fill(next, next + 26, nullptr);
+    }
 
-int main() {
-    std::ios::sync_with_stdio(false);
-    std::cin.tie(NULL);
-    std::cout.tie(NULL);
-
-    std::cin >> N;
-    visited.resize(N);
-    tree.resize(N);
-    int root = 0;
-
-    for (int i = 0; i < N; i++) {
-        int parent;
-        std::cin >> parent;
-
-        if (parent != -1) {
-            tree[parent].push_back(i);
-        } else {
-            root = i;
+    ~Node() {
+        for (auto &child: next) {
+            delete child;
         }
     }
 
-    std::cin >> delete_node;
+    void insert(const char *key) {
+        if (*key == 0) {
+            isEnd = true;
+        } else {
+            int next_index = *key - 'a';
 
-    if (delete_node == root) {
-        std::cout << 0 << "\n";
-    } else {
-        DFS(root);
-        std::cout << answer << "\n";
+            if (next[next_index] == nullptr) {
+                next[next_index] = new Node();
+            }
+
+            next[next_index]->insert(key + 1);
+        }
     }
 
-    return 0;
+    Node *find(const char *key) {
+        if (*key == 0) {
+            return this;
+        } else {
+            int next_index = *key - 'a';
+
+            if (next[next_index] == nullptr) {
+                return nullptr;
+            }
+
+            return next[next_index]->find(key + 1);
+        }
+    }
+};
+
+int main() {
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+    std::cout.tie(nullptr);
+
+    int n, m;
+    std::cin >> n >> m;
+    Node *root = new Node();
+
+    while (n > 0) {
+        char text[501];
+        std::cin >> text;
+        root->insert(text);
+        n--;
+    }
+
+    int count = 0;
+    while (m > 0) {
+        char text[501];
+        std::cin >> text;
+        Node *node = root->find(text);
+
+        if (node != nullptr && node->isEnd) {
+            count++;
+        }
+        m--;
+    }
+
+    std::cout << count << '\n';
 }

@@ -1,48 +1,8 @@
 #include <iostream>
 
-class Node {
-public:
-    Node *next[26];
-    bool isEnd;
+#include  "_14425.h"
 
-    Node() : isEnd(false) {
-        std::fill(next, next + 26, nullptr);
-    }
-
-    ~Node() {
-        for (auto &child: next) {
-            delete child;
-        }
-    }
-
-    void insert(const char *key) {
-        if (*key == 0) {
-            isEnd = true;
-        } else {
-            int next_index = *key - 'a';
-
-            if (next[next_index] == nullptr) {
-                next[next_index] = new Node();
-            }
-
-            next[next_index]->insert(key + 1);
-        }
-    }
-
-    Node *find(const char *key) {
-        if (*key == 0) {
-            return this;
-        } else {
-            int next_index = *key - 'a';
-
-            if (next[next_index] == nullptr) {
-                return nullptr;
-            }
-
-            return next[next_index]->find(key + 1);
-        }
-    }
-};
+using namespace _14425;
 
 int main() {
     std::ios::sync_with_stdio(false);

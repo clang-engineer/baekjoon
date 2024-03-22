@@ -1,24 +1,27 @@
 #include <iostream>
+#include <vector>
 
 int main() {
     std::ios::sync_with_stdio(false);
     std::cin.tie(NULL);
-    std::cout.tie(NULL);
+    std::cin.tie(NULL);
 
-    int su_no, quiz_no;
-    std::cin >> su_no >> quiz_no;
+    int N, M;
+    std::cin >> N >> M;
 
-    int s[100001] = {};
+    std::vector<std::vector<int>> a(N + 1, std::vector<int>(N + 1, 0));
+    std::vector<std::vector<int>> d(N + 1, std::vector<int>(N + 1, 0));
 
-    for (int i = 1; i <= su_no; i++) {
-        int temp;
-        std::cin >> temp;
-        s[i] = s[i - 1] + temp;
+    for (int i = 1; i <= N; i++) {
+        for (int j = 1; j <= N; j++) {
+            std::cin >> a[i][j];
+            d[i][j] = d[i - 1][j] + d[i][j - 1] - d[i - 1][j - 1] + a[i][j];
+        }
     }
 
-    for (int i = 0; i < quiz_no; i++) {
-        int a, b;
-        std::cin >> a >> b;
-        std::cout << s[b] - s[a - 1] << '\n';
+    for (int i = 0; i < M; i++) {
+        int x1, y1, x2, y2;
+        std::cin >> x1 >> y1 >> x2 >> y2;
+        std::cout << d[x2][y2] - d[x1 - 1][y2] - d[x2][y1 - 1] + d[x1 - 1][y1 - 1] << '\n';
     }
 }

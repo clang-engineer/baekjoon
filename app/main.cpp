@@ -1,40 +1,24 @@
 #include <iostream>
-#include "_1991.h"
-
-using namespace _1991;
 
 int main() {
     std::ios::sync_with_stdio(false);
     std::cin.tie(NULL);
     std::cout.tie(NULL);
 
-    int tree[26][2];
+    int su_no, quiz_no;
+    std::cin >> su_no >> quiz_no;
 
-    int n;
-    std::cin >> n;
+    int s[100001] = {};
 
-    for (int i = 0; i < n; i++) {
-        char node_char, left, right;
-        std::cin >> node_char >> left >> right;
-        int node = node_char - 'A';
-
-        if (left == '.') {
-            tree[node][0] = -1;
-        } else {
-            tree[node][0] = left - 'A';
-        }
-
-        if (right == '.') {
-            tree[node][1] = -1;
-        } else {
-            tree[node][1] = right - 'A';
-        }
+    for (int i = 1; i <= su_no; i++) {
+        int temp;
+        std::cin >> temp;
+        s[i] = s[i - 1] + temp;
     }
 
-    PreOrder(tree, 0);
-    std::cout << '\n';
-    InOrder(tree, 0);
-    std::cout << '\n';
-    PostOrder(tree, 0);
+    for (int i = 0; i < quiz_no; i++) {
+        int a, b;
+        std::cin >> a >> b;
+        std::cout << s[b] - s[a - 1] << '\n';
+    }
 }
-

@@ -9,44 +9,30 @@ int main() {
 
     int n;
     std::cin >> n;
-    std::vector<int> a(n, 0);
-    std::vector<char> result_symbol;
+    std::vector<int> arr(n, 0);
+    std::vector<int> answer(n, 0);
 
-    for (int i = 0; i < n; ++i) {
-        std::cin >> a[i];
+    for (int i = 0; i < n; i++) {
+        std::cin >> arr[i];
     }
 
-    std::stack<int> waiting_stack;
-    int num = 1;
-    bool is_possible = true;
+    std::stack<int> stack;
+    stack.push(0);
 
-    for (int i = 0; i < a.size(); i++) {
-        int su = a[i];
-
-        if (su >= num) {
-            while (su >= num) {
-                waiting_stack.push(num++);
-                result_symbol.push_back('+');
-            }
-            waiting_stack.pop();
-            result_symbol.push_back('-');
-        } else {
-            int n = waiting_stack.top();
-            waiting_stack.pop();
-            if (n > su) {
-                std::cout << "NO\n";
-                is_possible = false;
-                break;
-            } else {
-                result_symbol.push_back('-');
-            }
+    for (int i = 1; i < n; i++) {
+        while (!stack.empty() && arr[stack.top()] < arr[i]) {
+            answer[stack.top()] = arr[i];
+            stack.pop();
         }
+        stack.push(i);
     }
 
-    if (is_possible) {
-        for (int i = 0; i < result_symbol.size(); i++) {
-            std::cout << result_symbol[i] << '\n';
-        }
+    while (!stack.empty()) {
+        answer[stack.top()] = -1;
+        stack.pop();
     }
 
+    for (int i = 0; i < n; i++) {
+        std::cout << answer[i] << ' ';
+    }
 }

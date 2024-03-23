@@ -1,108 +1,52 @@
 #include <iostream>
-
-int check_arr[4];
-int my_arr[4];
-int check_secret = 0;
-
-void add(char c);
-
-void remove(char c);
+#include <vector>
+#include <stack>
 
 int main() {
     std::ios::sync_with_stdio(false);
     std::cin.tie(nullptr);
     std::cout.tie(nullptr);
 
-    int s, p;
-    std::cin >> s >> p;
+    int n;
+    std::cin >> n;
+    std::vector<int> a(n, 0);
+    std::vector<char> result_symbol;
 
-    int result = 0;
+    for (int i = 0; i < n; ++i) {
+        std::cin >> a[i];
+    }
 
-    std::string a;
-    std::cin >> a;
+    std::stack<int> waiting_stack;
+    int num = 1;
+    bool is_possible = true;
 
-    for (int i = 0; i < 4; i++) {
-        std::cin >> check_arr[i];
+    for (int i = 0; i < a.size(); i++) {
+        int su = a[i];
 
-        if (check_arr[i] == 0) {
-            check_secret++;
+        if (su >= num) {
+            while (su >= num) {
+                waiting_stack.push(num++);
+                result_symbol.push_back('+');
+            }
+            waiting_stack.pop();
+            result_symbol.push_back('-');
+        } else {
+            int n = waiting_stack.top();
+            waiting_stack.pop();
+            if (n > su) {
+                std::cout << "NO\n";
+                is_possible = false;
+                break;
+            } else {
+                result_symbol.push_back('-');
+            }
         }
     }
 
-    for (int i = 0; i < p; i++) {
-        add(a[i]);
-    }
-
-    if (check_secret == 4) {
-        result++;
-    }
-
-    for (int i = p; i < s; i++) {
-        add(a[i]);
-        remove(a[i - p]);
-
-        if (check_secret == 4) {
-            result++;
+    if (is_possible) {
+        for (int i = 0; i < result_symbol.size(); i++) {
+            std::cout << result_symbol[i] << '\n';
         }
     }
 
-    std::cout << result << '\n';
-}
-
-void add(char c) {
-    switch (c) {
-        case 'A':
-            my_arr[0]++;
-            if (my_arr[0] == check_arr[0]) {
-                check_secret++;
-            }
-            break;
-        case 'C':
-            my_arr[1]++;
-            if (my_arr[1] == check_arr[1]) {
-                check_secret++;
-            }
-            break;
-        case 'G':
-            my_arr[2]++;
-            if (my_arr[2] == check_arr[2]) {
-                check_secret++;
-            }
-            break;
-        case 'T':
-            my_arr[3]++;
-            if (my_arr[3] == check_arr[3]) {
-                check_secret++;
-            }
-            break;
-    }
-}
-
-void remove(char c) {
-    switch (c) {
-        case 'A':
-            if (my_arr[0] == check_arr[0]) {
-                check_secret--;
-            }
-            my_arr[0]--;
-            break;
-        case 'C':
-            if (my_arr[1] == check_arr[1]) {
-                check_secret--;
-            }
-            my_arr[1]--;
-            break;
-        case 'G':
-            if (my_arr[2] == check_arr[2]) {
-                check_secret--;
-            }
-            my_arr[2]--;
-            break;
-        case 'T':
-            if (my_arr[3] == check_arr[3]) {
-                check_secret--;
-            }
-            my_arr[3]--;
-            break;
-    }
 }

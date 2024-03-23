@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.11)
 
 # project info 
-project(BaekJoon
+project(baekjoon
   VERSION 1.0.0
   DESCRIPTION "BaekJoon Algorithm"
   LANGUAGES CXX)

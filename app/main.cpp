@@ -2,6 +2,8 @@
 #include <vector>
 #include <algorithm>
 
+int GetCountOfPairsWithSumEqualToM(const std::vector<int> &a, int m);
+
 int main() {
     std::ios::sync_with_stdio(false);
     std::cin.tie(NULL);
@@ -18,9 +20,13 @@ int main() {
 
     std::sort(a.begin(), a.end());
 
+    std::cout << GetCountOfPairsWithSumEqualToM(a, m) << std::endl;
+}
+
+int GetCountOfPairsWithSumEqualToM(const std::vector<int>& a, int m) {
     int count = 0;
     int i = 0;
-    int j = n - 1;
+    int j = a.size() - 1;
 
     while (i < j) {
         if (a[i] + a[j] < m) {
@@ -34,5 +40,7 @@ int main() {
         }
     }
 
-    std::cout << count << std::endl;
+    return count;
 }
+
+

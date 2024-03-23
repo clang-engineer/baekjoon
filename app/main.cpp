@@ -1,29 +1,36 @@
 #include <iostream>
+#include <vector>
+#include <algorithm>
 
 int main() {
     std::ios::sync_with_stdio(false);
     std::cin.tie(NULL);
     std::cout.tie(NULL);
 
-    int n;
-    std::cin >> n;
+    int n, m;
+    std::cin >> n >> m;
 
-    int count = 1;
-    int start_index = 1;
-    int end_index = 1;
-    int sum = 1;
+    std::vector<int> a(n, 0);
 
-    while (end_index != n) {
-        if (sum == n){
-            count++;
-            end_index++;
-            sum += end_index;
-        } else if (sum > n) {
-            sum -= start_index;
-            start_index++;
+    for (int i = 0; i < n; i++) {
+        std::cin >> a[i];
+    }
+
+    std::sort(a.begin(), a.end());
+
+    int count = 0;
+    int i = 0;
+    int j = n - 1;
+
+    while (i < j) {
+        if (a[i] + a[j] < m) {
+            i++;
+        } else if (a[i] + a[j] > m) {
+            j--;
         } else {
-            end_index++;
-            sum += end_index;
+            count++;
+            i++;
+            j--;
         }
     }
 
